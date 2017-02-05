@@ -39,7 +39,6 @@ alias grepi='grep -i';
 alias grepcfg='grep -v -E "^#|^$"';
 alias hg='history | grep -i';
 alias hostgrp="cat $HOSTS | grep -i ";
-alias info='echo -e "Host: $HOSTNAME\nOS: $OS\nUID: `whoami`\nCWD: `pwd`\nEditor: $EDITOR";';
 alias json='python -mjson.tool';
 alias la='ls -lAh --color';
 alias ll='ls -lArt --color';
@@ -87,23 +86,16 @@ function man() { /usr/bin/man $@ || (help $@ 2> /dev/null && help $@ | less) }
 
 # Backup a file with datestamp
 function bu() {
-    DATE=`date +%Y%m%d%H%M`;
-    ME=`who am i | cut -d " " -f1`;
-    sudo cp -p $1 $1-$DATE-$ME;
-    if [ -f $1-$DATE-$ME ]; then
-        echo -e "Backed up $1-$DATE-$ME";
-    else
-        echo "Back up failed!";
-    fi
+	cp -p "$1" "$1_$(date +%Y%m%d-%H%M)_$(whoami)";
 }
 function mkgz() {
-    if [ -d $1 ]; then
+    if [ -d "$1" ]; then
         echo "Unable to gzip a directory!";
     else
-        gzip -c9 $1 > $1.gz;
+        gzip -c9 "$1" > "$1.gz";
     fi
 }
 function untar() { tar -xf $@; }
-function mktar() { tar -cf $1.tar $1; }
-function mktgz() { tar -czf $1.tgz $1; }
+function mktar() { tar -cf "$1.tar" "$1"; }
+function mktgz() { tar -czf "$1.tgz" "$1"; }
 function mktZ() { tar -cZf $@; }
