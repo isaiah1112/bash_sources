@@ -25,9 +25,10 @@ Then, simply type `profile --reload` to load the new profile!
 
 To specify a loading order for source scripts simply prefix them like so:
 
-	00_default.sh
-	10_darwin.sh
-	30_git.sh
+	00_default.sh -> /Users/jdoe/git/bash_sources/sources/00_default.sh
+	10_darwin.sh -> /Users/jdoe/git/bash_sources/sources/10_darwin.sh
+	30_git.sh -> /Users/jdoe/git/bash_sources/sources/30_git.sh
+	40_fun.sh -> /Users/jdoe/git/bash_sources/sources/40_fun.sh
 	90_bash_completion.sh -> /opt/local/etc/profile.d/bash_completion.sh
 	91_virtualenvwrapper.sh -> /opt/local/bin/virtualenvwrapper.sh
 	99_local.sh
