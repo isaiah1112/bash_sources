@@ -43,7 +43,6 @@ alias json='python -mjson.tool';
 alias la='ls -lAh --color';
 alias ll='ls -lArt --color';
 alias ls='ls -lh --color';
-alias lstunnel='ps | grep "[s]sh \-D 8080"'; ## Used in conjunction with tunnel and ktunnel
 alias lns='ln -sfn';
 alias lagrp='la | grep';
 alias lsgrp='ls | grep';
@@ -85,9 +84,9 @@ alias tunnel='ssh -D 8080 -f -C -q -N';
 function man() { /usr/bin/man $@ || (help $@ 2> /dev/null && help $@ | less) }
 
 # Backup a file with datestamp
-function bu() {
-	cp -p "$1" "$1_$(date +%Y%m%d-%H%M)_$(whoami)";
-}
+function bu() { cp -p "$1" "$1_$(date +%Y%m%d-%H%M)_$(whoami)"; }
+
+# Compression functions
 function mkgz() {
     if [ -d "$1" ]; then
         echo "Unable to gzip a directory!";
