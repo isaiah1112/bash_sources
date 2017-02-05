@@ -1,0 +1,12 @@
+syntax enable
+filetype indent plugin on
+set background=dark
+set tabstop=8
+set expandtab
+set softtabstop=4
+set shiftwidth=4
+filetype indent on
+command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+command WQ :execute ':W' | :q
+command Wq :Wq
+command Q :q
