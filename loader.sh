@@ -15,7 +15,7 @@ fi
 ## Functions that make the loader tick
 function profile() {
 case $1 in
-	--edit|-E)
+	edit)
 		if [ -z $2 ]; then
     		echo 'profile --edit <source_script>';
     	else
@@ -23,10 +23,10 @@ case $1 in
       		source ~/.bash_profile;
     	fi
 	;;
-	--reload|-R)
+	reload)
 		source ~/.bash_profile;
 	;;
-	--info|-I)
+	info)
 		if [ -z $2 ]; then
 			head ~/.bash_profile | grep -E '^### ';
 			if [ -d ~/.sources.d ]; then
@@ -38,6 +38,6 @@ case $1 in
 		fi
 	;;
 	*)
-		echo 'profile [--edit|--info|--reload]';
+		echo 'profile [edit|info|reload]';
 esac
 }
