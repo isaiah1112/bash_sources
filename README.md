@@ -6,9 +6,9 @@ system that worked well and was easy to extend!
 
 # Installation
 
-To install bash\_sources, simply rename or symlink the **source\_loader.sh** file to your **~/.bash\_profile**:
+To install bash\_sources, simply rename or symlink the **loader.sh** file to your **~/.bash\_profile**:
 
-	cp <bash_sources_repo>/source_loader.sh ~/.bash_profile
+	ln -s <bash_sources_repo>/loader.sh ~/.bash_profile
 	
 Then simply quit and re-launch your terminal and/or `source ~/.bash\_profile`.  Then, you will be able to type `profile`
 and see what happens!
@@ -17,7 +17,7 @@ and see what happens!
 
 To add a new source, simply copy or symlink one of the script isn the `sources` directory into the newly created `~/.soruces.d` directory:
 
-	cp <bash_sources_repo>/sources/darwin.sh ~/sources.d/darwin.sh;
+	ln -s <bash_sources_repo>/sources/00_default.sh ~/sources.d/00_default.sh;
 	
 Then, simply type `profile --reload` to load the new profile!
 
@@ -26,7 +26,7 @@ Then, simply type `profile --reload` to load the new profile!
 To specify a loading order for source scripts simply prefix them like so:
 
 	00_default.sh
-	01_darwin.sh
+	10_darwin.sh
 	30_git.sh
 	90_bash_completion.sh -> /opt/local/etc/profile.d/bash_completion.sh
 	91_virtualenvwrapper.sh -> /opt/local/bin/virtualenvwrapper.sh
@@ -36,4 +36,4 @@ To specify a loading order for source scripts simply prefix them like so:
 
 I've included my simple **.vimrc** file as well.  To install simply:
 
-    mv vimrc.txt ~/.vimrc
+    ln -s <bash_sources_repo>/vimrc.txt ~/.vimrc

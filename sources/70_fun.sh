@@ -9,7 +9,7 @@ alias starwars='telnet towel.blinkenlights.nl';
 
 # Print the current startdate
 function stardate() {
-	if [ $1 == "--alternate" -o $1 == "-a" ]; then
+	if [ "$1" == "--alternate" -o "$1" == "-a" ]; then
 		date +%Y.%j | sed 's/\.0*/\./';
 	else
 		date +%Y%d.%m | sed 's/\.0*/\./';
