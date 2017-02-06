@@ -1,7 +1,6 @@
 ### Bash Profile: Linux Additions
 ### Author: Jesse Almanrode (https://about.me/JesseAlmanrode)
 ### License: GNU GPLv3 (https://choosealicense.com/licenses/gpl-3.0/)
-### Version: 1.0
 ### Aliases and functions specific to Linux flavors of UNIX (RedHat/CentOS/Ubuntu)
 
 if [ $(uname) != "Linux" ]; then

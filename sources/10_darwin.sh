@@ -1,7 +1,6 @@
 ### Bash Profile: Profile for Darwin (OS X)
 ### Author: Jesse Almanrode (https://about.me/JesseAlmanrode)
 ### License: GNU GPLv3 (https://choosealicense.com/licenses/gpl-3.0/)
-### Version: 1.0
 ### Aliases and functions specific to Darwin flavors of UNIX (OS X)
 
 if [ $(uname) != "Darwin" ]; then

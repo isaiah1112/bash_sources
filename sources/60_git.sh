@@ -1,7 +1,7 @@
 ### Bash Profile: Git Additions
 ### Author: Jesse Almanrode (https://about.me/JesseAlmanrode)
 ### License: GNU GPLv3 (https://choosealicense.com/licenses/gpl-3.0/)
-### Version: 1.0
+### Aliases and functions which load if you have git installed
 
 if [ -z $(which git 2> /dev/null) ]; then
 	echo "git binary not found. Please install it";

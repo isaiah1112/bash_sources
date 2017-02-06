@@ -1,7 +1,6 @@
 ### Bash Profile: Defaults
 ### Author: Jesse Almanrode (https://about.me/JesseAlmanrode)
 ### License: GNU GPLv3 (https://choosealicense.com/licenses/gpl-3.0/)
-### Version: 1.0
 ### The idea behind the defaults profile is to load things that work on any UNIX OS
 # Set the Locale
 export LANG=en_US.UTF-8
