@@ -43,8 +43,6 @@ else
 fi
 alias md5='md5 -q';
 alias smd5='sudo md5 -q ';
-alias ps='ps aux';
-alias psgrp='ps | grep -i';
 alias softwareupdate='sudo softwareupdate';
 if [ -d /Applications/TextWrangler.app ]; then
     alias txtw="open -a 'TextWrangler'";

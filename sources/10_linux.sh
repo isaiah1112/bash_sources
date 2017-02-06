@@ -22,8 +22,6 @@ fi
 alias fstab='sudo $EDITOR /etc/fstab';
 alias flushdns='sudo /etc/init.d/nscd restart';
 alias free='free -m';
-alias ps='ps -aef';
-alias psgrp='ps -aef | grep -i';
 function bandwidth_stats { ifconfig $1 | grep 'RX bytes'; }
 function ktunnel() { pids=$(ps | grep '[s]sh \-D 8080' | awk '{print $2}'); if [ -n "$pids" ]; then kill $pids; fi }
 function md5() { md5sum $1 | cut -d ' ' -f1; }

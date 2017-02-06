@@ -15,10 +15,10 @@ shopt -s histappend; # append to history file
 export LESS="iX";
 export OS=$(uname);
 export EDITOR=$(which vim 2>/dev/null);
-export HOSTS="/etc/hosts";
 if [ -z "$EDITOR" ]; then
     export EDITOR=$(which vi 2>/dev/null);
 fi
+export HOSTS="/etc/hosts";
 
 # Aliases (Make them conditional if possible)
 if [ -n $(which apg 2>/dev/null) ]; then
@@ -72,11 +72,12 @@ function b64_decode() { echo $(echo -n $1 | base64 -d;); }
 
 # Reverse SSH Tunnel for SOCKS proxy on port 8080
 function ktunnel() {
-if [ -n $(ps | grep '[s]sh \-D 8080' | awk '{print $2}') ]; then
-    kill $pids;
+pids=$(ps aux | grep '[s]sh' | grep '\-D 8080' | awk '{print $2}');
+if [ -n ${pids} ]; then
+    kill ${pids};
 fi
 }
-alias lstunnel='ps | grep "[s]sh \-D 8080"';
+alias lstunnel="ps aux | grep '[s]sh' | grep '\-D 8080'";
 alias tunnel='ssh -D 8080 -f -C -q -N';
 
 # Function for making man use help if no man page exists
