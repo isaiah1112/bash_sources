@@ -23,6 +23,13 @@ case $1 in
       		source ~/.bash_profile;
     	fi
 	;;
+	view)
+		if [ -z $2 ]; then
+    		echo 'profile view <source>';
+    	else
+      		less ~/.sources.d/$2;
+    	fi
+	;;
 	reload)
 		source ~/.bash_profile;
 	;;
@@ -49,6 +56,6 @@ case $1 in
 		fi
 	;;
 	*)
-		echo 'profile [edit|info|reload|load]';
+		echo 'profile [edit|info|reload|load|view]';
 esac
 }
