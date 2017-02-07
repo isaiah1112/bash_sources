@@ -17,7 +17,7 @@ function profile() {
 case $1 in
 	edit)
 		if [ -z $2 ]; then
-    		echo 'profile --edit <source_script>';
+    		echo 'profile edit <source>';
     	else
       		vi ~/.sources.d/$2;
       		source ~/.bash_profile;
@@ -25,6 +25,17 @@ case $1 in
 	;;
 	reload)
 		source ~/.bash_profile;
+	;;
+	load)
+		if [ -z $2 ]; then
+			echo 'profile load <source>';
+		else
+			if [ -f ~/.sources.d/$2 ]; then
+				source ~/.sources.d/$2;
+			else
+				echo "Unable to load ~/.sources.d/$2";
+			fi
+		fi
 	;;
 	info)
 		if [ -z $2 ]; then
@@ -38,6 +49,6 @@ case $1 in
 		fi
 	;;
 	*)
-		echo 'profile [edit|info|reload]';
+		echo 'profile [edit|info|reload|load]';
 esac
 }
