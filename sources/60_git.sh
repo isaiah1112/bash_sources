@@ -59,7 +59,6 @@ if [ -d .git ]; then
     if [ "$1" == "--help" -o "$1" == "-h" ]; then
         echo "git_release_notes [starting_tag] [ending_tag]";
     else
-        repo_url=$(git config --get remote.origin.url | sed 's/\.git//');
         if [ -z "$1" ]; then
             last_release=$(git tag | tail -1);
         else
