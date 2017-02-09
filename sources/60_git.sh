@@ -40,14 +40,18 @@ fi
 }
 
 function repoup() {
-for dir in $(find . -maxdepth 2 -type d -name .git | cut -d '/' -f2); do
-    if [ -d ${dir}/.git ]; then
-        cd ${dir};
-        echo "Processing ${dir}";
-        git pull;
-        cd ..;
-    fi
-done
+if [ "$1" == "--help" -o "$1" == "-h" ]; then
+	echo "Run git pull in all repos under $(pwd)";
+else
+	for dir in $(find . -maxdepth 2 -type d -name .git | cut -d '/' -f2); do
+		if [ -d ${dir}/.git ]; then
+			cd ${dir};
+			echo "Processing ${dir}";
+			git pull;
+			cd ..;
+		fi
+	done
+fi
 }
 
 function git_release_notes () {
