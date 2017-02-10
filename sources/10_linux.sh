@@ -4,7 +4,7 @@
 ### Aliases and functions specific to Linux flavors of UNIX (RedHat/CentOS/Ubuntu)
 
 if [ $(uname) != "Linux" ]; then
-	echo "Not running Linux, not loading profile";
+	echo "Not running Linux. Not loading source.";
 	return 1;
 fi
 

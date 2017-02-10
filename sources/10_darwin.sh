@@ -4,7 +4,7 @@
 ### Aliases and functions specific to Darwin flavors of UNIX (OS X)
 
 if [ $(uname) != "Darwin" ]; then
-	echo "Not running Darwin, not loading profile";
+	echo "Not running Darwin. Skipping source.";
 	return 1;
 fi
 

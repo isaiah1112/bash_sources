@@ -4,7 +4,7 @@
 ### Aliases and functions which load if you have git installed
 
 if [ -z $(which git 2> /dev/null) ]; then
-	echo "git binary not found. Please install it";
+	echo "git is not installed. Not loading source.";
 	return 1;
 fi
 
@@ -15,7 +15,7 @@ function gitmerged() {
 if [ -d .git ]; then
     if [ "$1" == "--help" -o "$1" == "-h" ]; then
         echo "List and delete branches in git that have been merged to master";
-        echo "gitmerge [--delete]";
+        echo "USAGE: gitmerge [--delete]";
         return 0;
     elif [ "$1" == "--delete" ] ; then
         git branch -r --merged origin/master | grep -v "^.*master" | grep -v "^.*upstream" | grep -v "^.*develop" | sed s:origin/:: | xargs -n 1 git push origin --delete;
@@ -57,7 +57,7 @@ fi
 function git_release_notes () {
 if [ -d .git ]; then
     if [ "$1" == "--help" -o "$1" == "-h" ]; then
-        echo "git_release_notes [starting_tag] [ending_tag]";
+        echo "USAGE: git_release_notes [starting_tag] [ending_tag]";
     else
         if [ -z "$1" ]; then
             last_release=$(git tag | tail -1);
