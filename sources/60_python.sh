@@ -9,7 +9,7 @@ if [ -z $(which python 2>/dev/null) ]; then
 fi
 
 alias json='python -mjson.tool';
-alias httpserver='python -m SimpleHTTPServer';
+alias simplehttpserver='python -m SimpleHTTPServer';
 
 
 function pipclean() {
