@@ -46,7 +46,7 @@ else
 	for dir in $(find . -maxdepth 2 -type d -name .git | cut -d '/' -f2); do
 		if [ -d ${dir}/.git ]; then
 			cd ${dir};
-			echo "Processing ${dir}";
+			echo -e "----------------\n${dir}\n----------------";
 			git pull;
 			cd ..;
 		fi
