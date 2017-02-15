@@ -62,8 +62,9 @@ alias wcl='wc -l';
 
 ######### Universal bash functions
 
-function b64_encode() { echo -n $1 | base64; }
-function b64_decode() { echo $(echo -n $1 | base64 -d;); }
+# These functions are similar to to how python would do things
+function b64encode() { echo -n $1 | base64; }
+function b64decode() { echo $(echo -n $1 | base64 -d;); }
 
 # Reverse SSH Tunnel for SOCKS proxy on port 8080
 function ktunnel() {
