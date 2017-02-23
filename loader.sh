@@ -64,6 +64,6 @@ case $1 in
 		ls -1 $HOME/.sources.d/;
 	;;
 	*)
-		echo 'profile [edit|info|reload|load|view]';
+		echo 'profile [edit|info|reload|load|view|list]';
 esac
 }
