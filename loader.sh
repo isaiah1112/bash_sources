@@ -60,6 +60,9 @@ case $1 in
 			head $HOME/.sources.d/$2 | grep -E '^### ';
 		fi
 	;;
+	list)
+		ls -1 $HOME/.sources.d/;
+	;;
 	*)
 		echo 'profile [edit|info|reload|load|view]';
 esac
