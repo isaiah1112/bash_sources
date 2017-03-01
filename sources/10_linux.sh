@@ -1,11 +1,10 @@
 ### Bash Profile: Linux Additions
 ### Author: Jesse Almanrode (https://about.me/JesseAlmanrode)
 ### License: GNU GPLv3 (https://choosealicense.com/licenses/gpl-3.0/)
-### Version: 1.0
 ### Aliases and functions specific to Linux flavors of UNIX (RedHat/CentOS/Ubuntu)
 
 if [ $(uname) != "Linux" ]; then
-	echo "Not running Linux, not loading profile";
+	echo "Not running Linux. Not loading source.";
 	return 1;
 fi
 
@@ -23,8 +22,6 @@ fi
 alias fstab='sudo $EDITOR /etc/fstab';
 alias flushdns='sudo /etc/init.d/nscd restart';
 alias free='free -m';
-alias ps='ps -aef';
-alias psgrp='ps -aef | grep -i';
 function bandwidth_stats { ifconfig $1 | grep 'RX bytes'; }
 function ktunnel() { pids=$(ps | grep '[s]sh \-D 8080' | awk '{print $2}'); if [ -n "$pids" ]; then kill $pids; fi }
 function md5() { md5sum $1 | cut -d ' ' -f1; }

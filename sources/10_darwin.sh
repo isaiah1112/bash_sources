@@ -1,11 +1,10 @@
 ### Bash Profile: Profile for Darwin (OS X)
 ### Author: Jesse Almanrode (https://about.me/JesseAlmanrode)
 ### License: GNU GPLv3 (https://choosealicense.com/licenses/gpl-3.0/)
-### Version: 1.0
 ### Aliases and functions specific to Darwin flavors of UNIX (OS X)
 
 if [ $(uname) != "Darwin" ]; then
-	echo "Not running Darwin, not loading profile";
+	echo "Not running Darwin. Skipping source.";
 	return 1;
 fi
 
@@ -14,7 +13,9 @@ export OS_NAME=$(sw_vers -productName);
 export OS_VERSION=$(sw_vers -productVersion);
 
 ## Aliases
-
+if [ -d /Applications/Atom.app ]; then
+	alias atom="open -a 'Atom'";
+fi
 alias bandwidth_stats="top -l 1 | grep Networks | sed 's/[0-9]*\///g' | sed 's/ packets://g'";
 alias bandwidth_stats_live="netstat -w1 -I";
 alias cp='cp -rp';
@@ -44,8 +45,6 @@ else
 fi
 alias md5='md5 -q';
 alias smd5='sudo md5 -q ';
-alias ps='ps aux';
-alias psgrp='ps | grep -i';
 alias softwareupdate='sudo softwareupdate';
 if [ -d /Applications/TextWrangler.app ]; then
     alias txtw="open -a 'TextWrangler'";
@@ -115,17 +114,25 @@ fi
 if [ -n $(which gs 2>/dev/null) ]; then
 	# Run an encrypted pdf through a print function to decrypt it
 	function decrypt_pdf () {
+            if [ -z "$1" ]; then
+                echo "USAGE: decrypt_pdf PDF";
+            else
 		output=$(echo $1 | sed 's/\.pdf/_decrypted\.pdf/');
 		gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile="$output" -dPDFSETTINGS=/prepress -f "$1";
+            fi
 	}
 	# Convert a PDF to jpg files
 	function pdf2jpg () {
+            if [ -z "$1" ]; then
+                echo "USAGE: pdf2jpg PDF";
+            else
 		outname=$(echo "$1" | sed 's/\.pdf//');
 		curpath=$(dirname "$1");
 		if [ ! -d "$curpath/$outname" ]; then
 			mkdir -p "$curpath/$outname";
 		fi
 		gs -dNOPAUSE -dBATCH -sDEVICE=jpeg -dJPEGQ=100 -sOutputFile="${curpath}/${outname}/${outname} %03d.jpg" "$1";
+            fi
 	}
 fi
 
