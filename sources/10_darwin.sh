@@ -13,9 +13,6 @@ export OS_NAME=$(sw_vers -productName);
 export OS_VERSION=$(sw_vers -productVersion);
 
 ## Aliases
-if [ -d /Applications/Atom.app ]; then
-	alias atom="open -a 'Atom'";
-fi
 alias bandwidth_stats="top -l 1 | grep Networks | sed 's/[0-9]*\///g' | sed 's/ packets://g'";
 alias bandwidth_stats_live="netstat -w1 -I";
 alias cp='cp -rp';
