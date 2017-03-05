@@ -61,11 +61,11 @@ if [ -f ~/.ssh/id_rsa ]; then
 fi
 
 # If pdsh is installed, force it to use ssh
-if [ -n $(which pdsh 2>/dev/null) ]; then
+if [ -n "$(which pdsh 2>/dev/null)" ]; then
     export PDSH_RCMD_TYPE=ssh;
 fi
 
-if [ -n $(which ffmpeg 2> /dev/null) ]; then
+if [ -n "$(which ffmpeg 2> /dev/null)" ]; then
 	# if ffmpeg is installed, create a function for converting to mp4 containers
     function mkv2mp4() {
         if [ -z "$1" -o "$1" == "--help" ]; then
@@ -83,7 +83,7 @@ if [ -n $(which ffmpeg 2> /dev/null) ]; then
 fi
 
 # Wrapper for sshfs that will create the mountpoint if it doesn't exist
-if [ -n $(which sshfs 2>/dev/null) ]; then
+if [ -n "$(which sshfs 2>/dev/null)" ]; then
 	# Wrapper for sshfs that will create the mountpoint if it doesn't exist
 	function sshfs() {
 		mountPoint=${@:$#};
@@ -108,7 +108,7 @@ if [ -n $(which sshfs 2>/dev/null) ]; then
 fi
 
 # GhostScript functions
-if [ -n $(which gs 2>/dev/null) ]; then
+if [ -n "$(which gs 2>/dev/null)" ]; then
 	# Run an encrypted pdf through a print function to decrypt it
 	function decrypt_pdf () {
             if [ -z "$1" ]; then
