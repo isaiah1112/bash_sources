@@ -9,16 +9,16 @@ system that worked well and was easy to extend!
 To install bash\_sources, simply rename or symlink the **loader.sh** file to your **~/.bash\_profile**:
 
 	ln -s <bash_sources_repo>/loader.sh ~/.bash_profile
-	
+
 Then simply quit and re-launch your terminal and/or `source ~/.bash\_profile`.  Then, you will be able to type `profile`
 and see what happens!
 
 # Sources
 
-To add a new source, simply copy or symlink one of the script isn the `sources` directory into the newly created `~/.soruces.d` directory:
+To add a new source, simply copy or symlink one of the script isn the `sources` directory into the newly created `~/.sources.d` directory:
 
 	ln -s <bash_sources_repo>/sources/00_default.sh ~/sources.d/00_default.sh;
-	
+
 Then, simply type `profile --reload` to load the new profile!
 
 ## Loading order
@@ -32,7 +32,7 @@ To specify a loading order for source scripts simply prefix them like so:
 	90_bash_completion.sh -> /opt/local/etc/profile.d/bash_completion.sh
 	90_virtualenvwrapper.sh -> /opt/local/bin/virtualenvwrapper.sh
 	99_local.sh
-	
+
 ## Other Sources
 
 You can store other sources in your **~/.sources.d** directory.  As long as they do not end with `.sh` they will not
