@@ -10,7 +10,7 @@ To install bash\_sources, simply rename or symlink the **loader.sh** file to you
 
 	ln -s <bash_sources_repo>/loader.sh ~/.bash_profile
 
-Then simply quit and re-launch your terminal and/or `source ~/.bash\_profile`.  Then, you will be able to type `profile`
+Then simply quit and re-launch your terminal and/or `source ~/.bash_profile`.  Then, you will be able to type `profile`
 and see what happens!
 
 # Sources
@@ -52,7 +52,7 @@ be loaded during shell startup.  For example:
 	99_local.sh
 	special_stuff
 
-In this case, the `special\_stuff` source will not be loaded during shell startup.  You can load it later on by:
+In this case, the `special_stuff` source will not be loaded during shell startup.  You can load it later on by:
 
 	profile load special_stuff
 
