@@ -147,3 +147,7 @@ _ssh(){
     COMPREPLY=($(compgen -W "${opts}" ${cur}));
 }
 complete -F _ssh ssh scp;
+
+if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+  source /opt/local/etc/profile.d/bash_completion.sh
+fi
