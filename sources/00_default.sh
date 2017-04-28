@@ -63,9 +63,10 @@ alias wcl='wc -l';
 
 function myip() {
     ipv6=$(curl -s 'http://ip6.me/' | grep -A 1 'Address of' | cut -d '>' -f4 | cut -d '<' -f1);
-    echo ${ipv6};
-    if [ -n $(echo ${ipv6} | grep 'IPv6') ]; then
-        curl -s 'http://ip4.me/' | grep -A 1 'Address of' | cut -d '>' -f4 | cut -d '<' -f1;
+    echo ${ipv6} | sed 's/ /: /'; 
+    if [ -n "$(echo ${ipv6} | grep 'IPv6')" ]; then
+      ipv4=$(curl -s 'http://ip4.me/' | grep -A 1 'Address of' | cut -d '>' -f4 | cut -d '<' -f1);
+      echo ${ipv4} | sed 's/ /: /';
     fi
 }
 
