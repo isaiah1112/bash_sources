@@ -44,7 +44,6 @@ alias ls='ls -lh';
 alias lns='ln -sfn';
 alias lagrp='la | grep';
 alias lsgrp='ls | grep';
-alias myip="curl -s 'http://ip6.me/' | grep -A 1 'Address of' | cut -d '>' -f4 | cut -d '<' -f1";
 alias portgrp='sudo netstat -lp | grep -i';
 # For quick registering and uploading to PyPi
 alias resolv='sudo $EDITOR /etc/resolv.conf';
@@ -61,6 +60,14 @@ alias tracert='traceroute';
 alias wcl='wc -l';
 
 ######### Universal bash functions
+
+function myip() {
+    ipv6=$(curl -s 'http://ip6.me/' | grep -A 1 'Address of' | cut -d '>' -f4 | cut -d '<' -f1);
+    echo ${ipv6};
+    if [ -n $(echo ${ipv6} | grep 'IPv6') ]; then
+        curl -s 'http://ip4.me/' | grep -A 1 'Address of' | cut -d '>' -f4 | cut -d '<' -f1;
+    fi
+}
 
 # These functions are similar to to how python would do things
 function b64encode() { echo -n $1 | base64; }
