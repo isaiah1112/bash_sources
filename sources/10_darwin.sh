@@ -83,7 +83,8 @@ if [ -n "$(which ffmpeg 2> /dev/null)" ]; then
 fi
 
 # Wrapper for sshfs that will create the mountpoint if it doesn't exist
-if [ -n "$(which sshfs 2>/dev/null)" ]; then
+sshfsloc=$(which sshfs 2>/dev/null);
+if [ -n "${sshfsloc}" ]; then
 	# Wrapper for sshfs that will create the mountpoint if it doesn't exist
 	function sshfs() {
 		mountPoint=${@:$#};
@@ -94,13 +95,13 @@ if [ -n "$(which sshfs 2>/dev/null)" ]; then
 				sleep 1;
 				open $mountPoint;
 			else
-				/usr/local/bin/sshfs $@;
+				${sshfsloc} $@;
 				sleep 1;
 				open $mountPoint;
 			fi
 		else
 			mkdir $mountPoint;
-			/usr/local/bin/sshfs $@;
+			${sshfsloc} $@;
 			sleep 1;
 			open $mountPoint;
 		fi
@@ -147,3 +148,7 @@ _ssh(){
     COMPREPLY=($(compgen -W "${opts}" ${cur}));
 }
 complete -F _ssh ssh scp;
+
+if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+  source /opt/local/etc/profile.d/bash_completion.sh
+fi
