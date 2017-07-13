@@ -8,6 +8,7 @@ if [ -z $(which git 2> /dev/null) ]; then
 	return 1;
 fi
 
+alias diff='diff -burN';
 alias gitmod='git diff --cached --name-only --diff-filter=ACM';
 alias gitgrep='git log -p -q -S';
 
