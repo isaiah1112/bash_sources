@@ -1,7 +1,7 @@
 # Welcome
 
 Thank you for taking the time to check out bash_sources.  This is my attempt to create a functional bash environment without
-creating a single monolithic **bash\_profile** file.  I've been in IT 15 years and decided it was time to make a bash\_profile
+creating a single monolithic **bash\_profile** file.  I've been in IT over 15 years and decided it was time to make a bash\_profile
 system that worked well and was easy to extend!
 
 # Installation
@@ -19,7 +19,7 @@ To add a new source, simply copy or symlink one of the script isn the `sources` 
 
 	ln -s <bash_sources_repo>/sources/00_default.sh ~/sources.d/00_default.sh;
 
-Then, simply type `profile --reload` to load the new profile!
+Then, simply type `profile reload` to load the new profile!
 
 ## Loading order
 
