@@ -14,3 +14,12 @@ function stardate() {
 		date +%Y%d.%m | sed 's/\.0*/\./';
 	fi
 }
+
+function lgtm() {
+  mrkdown=$(curl -s -k -L -A "Mozilla/5.0"  "http://www.lgtm.in/g"  | grep -A 1 markdown | grep LGTM | cut -d ">" -f2);
+  if [ "${1}" == "--url" ]; then
+    echo ${mrkdown} | cut -d '(' -f2 | cut -d ')' -f1;
+  else
+    echo ${mrkdown};
+  fi
+}

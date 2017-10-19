@@ -29,30 +29,34 @@ else
 fi
 }
 
-function gitup() {
-if [ -d .git ]; then
-    for branch in $(git branch | awk '{print $NF}'); do
-        git checkout ${branch};
-        git pull;
-    done
-else
-    echo "Not a git repository";
-fi
+function branchup() {
+	if [ "$1" == "--help" -o "$1" == "-h" ]; then
+		echo "Run git pull on all branches in $(pwd)";
+	else
+		if [ -d .git ]; then
+		    for branch in $(git branch | awk '{print $NF}'); do
+		        git checkout ${branch};
+		        git pull;
+		    done
+		else
+		    echo "Not a git repository";
+		fi
+ fi
 }
 
 function repoup() {
-if [ "$1" == "--help" -o "$1" == "-h" ]; then
-	echo "Run git pull in all repos under $(pwd)";
-else
-	for dir in $(find . -maxdepth 2 -type d -name .git | cut -d '/' -f2); do
-		if [ -d ${dir}/.git ]; then
-			cd ${dir};
-			echo -e "----------------\n${dir}\n----------------";
-			git pull;
-			cd ..;
-		fi
-	done
-fi
+	if [ "$1" == "--help" -o "$1" == "-h" ]; then
+		echo "Run git pull in all repos under $(pwd)";
+	else
+		for dir in $(find . -maxdepth 2 -type d -name .git | cut -d '/' -f2); do
+			if [ -d ${dir}/.git ]; then
+				cd ${dir};
+				echo -e "----------------\n${dir}\n----------------";
+				git pull;
+				cd ..;
+			fi
+		done
+	fi
 }
 
 function git_release_notes () {
