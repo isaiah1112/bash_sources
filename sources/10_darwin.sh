@@ -40,8 +40,7 @@ else
     alias systemsetup='sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Support/systemsetup';
     alias networksetup='sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Support/networksetup';
 fi
-alias md5='md5 -q';
-alias smd5='sudo md5 -q ';
+alias md5q='md5 -q';
 alias softwareupdate='sudo softwareupdate';
 if [ -d /Applications/TextWrangler.app ]; then
     alias txtw="open -a 'TextWrangler'";
