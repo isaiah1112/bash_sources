@@ -11,6 +11,7 @@ fi
 ## ENV Exports
 export OS_NAME=$(sw_vers -productName);
 export OS_VERSION=$(sw_vers -productVersion);
+export LESS='-R -F -X $LESS';
 
 ## Aliases
 alias bandwidth_stats="top -l 1 | grep Networks | sed 's/[0-9]*\///g' | sed 's/ packets://g'";
