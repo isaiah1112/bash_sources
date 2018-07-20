@@ -49,7 +49,7 @@ fi
 
 # Do macports stuff (if installed)
 if [ -f /opt/local/bin/port ]; then
-    export PATH="/opt/local/bin:/opt/local/sbin:$PATH";
+    export PATH="/opt/local/bin:/opt/local/sbin:/opt/local/libexec/gnubin/:$PATH";
     alias portupdate="sudo port selfupdate; sudo port upgrade outdated";
     alias portclean="sudo port clean -f --all installed; sudo port -f uninstall inactive";
 fi
