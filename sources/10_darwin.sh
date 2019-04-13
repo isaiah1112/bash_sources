@@ -11,6 +11,7 @@ fi
 ## ENV Exports
 export OS_NAME=$(sw_vers -productName);
 export OS_VERSION=$(sw_vers -productVersion);
+export LESS='-R -F -X $LESS';
 
 ## Aliases
 alias bandwidth_stats="top -l 1 | grep Networks | sed 's/[0-9]*\///g' | sed 's/ packets://g'";
@@ -48,7 +49,7 @@ fi
 
 # Do macports stuff (if installed)
 if [ -f /opt/local/bin/port ]; then
-    export PATH="/opt/local/bin:/opt/local/sbin:$PATH";
+    export PATH="/opt/local/bin:/opt/local/sbin:/opt/local/libexec/gnubin/:$PATH";
     alias portupdate="sudo port selfupdate; sudo port upgrade outdated";
     alias portclean="sudo port clean -f --all installed; sudo port -f uninstall inactive";
 fi
