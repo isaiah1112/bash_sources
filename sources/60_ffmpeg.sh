@@ -5,7 +5,7 @@
 
 
 if [ -z $(which ffmpeg 2> /dev/null) ]; then
-	echo "docker is not installed. Not loading source.";
+	echo "ffmpeg is not installed. Not loading source.";
 	return 1;
 fi
 
