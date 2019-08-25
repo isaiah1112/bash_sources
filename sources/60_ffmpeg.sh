@@ -9,11 +9,23 @@ if [ -z $(which ffmpeg 2> /dev/null) ]; then
 	return 1;
 fi
 
-if [ -z $(which ffprobe 2> /dev/null) ]; then
-  alias ffprobe='ffprobe -v quiet -print_format json -show_format -show_streams';
-fi
+alias ffjson='ffprobe -v quiet -print_format json -show_format -show_streams';
 
-# if ffmpeg is installed, create a function for converting to mp4 containers
+# function for printing specific details about a video in a specific show_format
+function ffinfo () {
+	if [ -z "$1" -o "$1" == "--help" ]; then
+			echo 'USAGE: ffinfo <file>';
+			return 0;
+	fi
+	video_stats=$(ffprobe -v quiet -select_streams v:0 -show_entries stream=codec_name,height,bit_rate "$1");
+	echo Filename: "$1";
+	echo Format: $(echo "$video_stats" | grep -Eo 'h264|h265');
+	echo Resolution: $(echo "$video_stats" | grep 'height' | grep -Eo '\d+')p;
+	echo Bitrate: $(( $(echo "$video_stats" | grep bit_rate | grep -Eo '\d+') / 1000))kb/s;
+	echo Filesize: $(ls -h | grep "$1" | awk '{print $5}');
+}
+
+# function for converting mkv to mp4 (container only)
 function mkv2mp4() {
     if [ -z "$1" -o "$1" == "--help" ]; then
         echo 'USAGE: mkv2mp4 <mkv> [mp4]';
@@ -49,7 +61,7 @@ function mkpreviewgif () {
     return 0;
   fi
 	start=60;
-	stop=$(ffprobe -v quiet -print_format json -show_format "$1" | grep duration | grep -Eo "\d+\.\d+" | cut -d '.' -f1);
+	stop=$(ffprobe -v quiet -show_format "$1" | grep duration | grep -Eo "\d+\.\d+" | cut -d '.' -f1);
 	step=60;
 	length=3;
 	fps=5;
