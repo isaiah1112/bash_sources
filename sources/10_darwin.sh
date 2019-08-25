@@ -65,23 +65,6 @@ if [ -n "$(which pdsh 2>/dev/null)" ]; then
     export PDSH_RCMD_TYPE=ssh;
 fi
 
-if [ -n "$(which ffmpeg 2> /dev/null)" ]; then
-	# if ffmpeg is installed, create a function for converting to mp4 containers
-    function mkv2mp4() {
-        if [ -z "$1" -o "$1" == "--help" ]; then
-            echo 'USAGE: mkv2mp4 <mkv> [mp4]';
-            return 0;
-        fi
-        mkvname=$1;
-        if [ -z "$2" ]; then
-            mp4name=$(echo "$mkvname" | sed 's/\.mkv/\.mp4/g');
-        else
-            mp4name=$2
-        fi
-        ffmpeg -i "$mkvname" -c:v copy -c:a copy "$mp4name";
-    }
-fi
-
 # Wrapper for sshfs that will create the mountpoint if it doesn't exist
 sshfsloc=$(which sshfs 2>/dev/null);
 if [ -n "${sshfsloc}" ]; then

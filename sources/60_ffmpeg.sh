@@ -1,0 +1,95 @@
+### Bash Profile: ffmpeg Additions
+### Author: Jesse Almanrode (https://about.me/JesseAlmanrode)
+### License: GNU GPLv3 (https://choosealicense.com/licenses/gpl-3.0/)
+### Aliases and functions which load if you have ffmpeg installed
+
+
+if [ -z $(which ffmpeg 2> /dev/null) ]; then
+	echo "docker is not installed. Not loading source.";
+	return 1;
+fi
+
+if [ -z $(which ffprobe 2> /dev/null) ]; then
+  alias ffprobe='ffprobe -v quiet -print_format json -show_format -show_streams';
+fi
+
+# if ffmpeg is installed, create a function for converting to mp4 containers
+function mkv2mp4() {
+    if [ -z "$1" -o "$1" == "--help" ]; then
+        echo 'USAGE: mkv2mp4 <mkv> [mp4]';
+        return 0;
+    fi
+    mkvname=$1;
+    if [ -z "$2" ]; then
+        mp4name=$(echo "$mkvname" | sed 's/\.mkv/\.mp4/g');
+    else
+        mp4name=$2
+    fi
+    ffmpeg -i "$mkvname" -c:v copy -c:a copy "$mp4name";
+}
+
+# function for building screencaptures every X seconds with timestamps
+function mkscreens () {
+ if [ -z "$1" -o "$1" == "--help" ]; then
+   echo 'Usage: mkscreens <file> [split]'
+   return 0;
+ fi
+ mkdir screens;
+ if [ -n "$2" ]; then
+   ffmpeg -hide_banner -i "$1" -vf "fps=1/$2,drawtext=fontfile=/Library/Fonts/Arial.ttf:fontsize=45:fontcolor=yellow:box=1:boxcolor=black:x=(W-tw)/2:y=H-th-10:text='%{pts\:hms}'" screens/img%03d.jpg;
+ else
+   ffmpeg -hide_banner -i "$1" -vf "fps=1/60,drawtext=fontfile=/Library/Fonts/Arial.ttf:fontsize=45:fontcolor=yellow:box=1:boxcolor=black:x=(W-tw)/2:y=H-th-10:text='%{pts\:hms}'" screens/img%03d.jpg;
+ fi
+}
+
+# function for creating a gif preview of a media file
+function mkpreviewgif () {
+  start=60;
+  stop=$(ffprobe -v quiet -print_format json -show_format "$1" | grep duration | grep -Eo "\d+\.\d+" | cut -d '.' -f1);
+  step=60;
+  length=3;
+  fps=5;
+  scale=320;
+  if [ -z "$1" -o "$1" == "--help" ]; then
+    echo 'Usage: mkpreviewgif <file> [--start|stop|step|length|fps|scale]'
+    return 0;
+  fi
+  if [ $# -gt 1 ]; then
+    for i in "${@:2}"; do
+      case $i in
+        --start=*)
+          start=${i#*=};
+        ;;
+        --stop=*)
+          stop=${i#*=};
+        ;;
+        --step=*)
+          step=${i#*=};
+        ;;
+        --lenght=*)
+          length=${i#*=};
+        ;;
+        --fps=*)
+          fps=${i#*=};
+        ;;
+        --scale=*)
+          scale=${i#*=};
+        ;;
+        *)
+        echo "Unknown option $i";
+        return 1;
+      esac
+    done
+  fi
+  mkdir /tmp/gifs;
+  echo "Generating preview gifs for $1";
+  while [ $start -lt $stop ]; do
+    ffmpeg -v quiet -ss $start -t $length -i "$1" -vf "fps=$fps,scale=$scale:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 1 /tmp/gifs/$start.gif;
+    echo file /tmp/gifs/$start.gif | tee -a /tmp/gifs/files.txt;
+    let start=$start+$step;
+  done
+  echo "Compiling single gif from previews...";
+  ffmpeg -v quiet -f concat -safe 0 -i /tmp/gifs/files.txt -ignore_loop 1 preview.gif;
+  echo "Wrote preview.gif";
+  rm -rf /tmp/gifs/;
+}
