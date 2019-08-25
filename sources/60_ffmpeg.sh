@@ -44,16 +44,16 @@ function mkscreens () {
 
 # function for creating a gif preview of a media file
 function mkpreviewgif () {
-  start=60;
-  stop=$(ffprobe -v quiet -print_format json -show_format "$1" | grep duration | grep -Eo "\d+\.\d+" | cut -d '.' -f1);
-  step=60;
-  length=3;
-  fps=5;
-  scale=320;
   if [ -z "$1" -o "$1" == "--help" ]; then
     echo 'Usage: mkpreviewgif <file> [--start|stop|step|length|fps|scale]'
     return 0;
   fi
+	start=60;
+	stop=$(ffprobe -v quiet -print_format json -show_format "$1" | grep duration | grep -Eo "\d+\.\d+" | cut -d '.' -f1);
+	step=60;
+	length=3;
+	fps=5;
+	scale=320;
   if [ $# -gt 1 ]; then
     for i in "${@:2}"; do
       case $i in
