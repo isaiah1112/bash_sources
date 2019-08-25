@@ -10,7 +10,7 @@ fi
 
 ## Load files and links in $HOME/.sources.d/ that end in .sh
 if [ -d $HOME/.sources.d ]; then
-	for f in $(find $HOME/.sources.d | grep ".sh$"); do
+	for f in $(find $HOME/.sources.d | grep ".sh$" | sort); do
 		source $f;
 	done
 else
