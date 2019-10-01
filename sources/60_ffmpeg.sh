@@ -78,7 +78,7 @@ function mkpreviewgif () {
         --step=*)
           step=${i#*=};
         ;;
-        --lenght=*)
+        --length=*)
           length=${i#*=};
         ;;
         --fps=*)
