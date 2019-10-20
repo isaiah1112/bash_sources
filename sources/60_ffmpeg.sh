@@ -11,6 +11,15 @@ fi
 
 alias ffjson='ffprobe -v quiet -print_format json -show_format -show_streams';
 
+# function for downloading m3u8 content to an mp4 file
+function m3u8_download() {
+	if [ -z "$1" -o "$1" == "--help" ]; then
+			echo 'USAGE: m3u8_download <url> <file>';
+			return 0;
+	fi
+	ffmpeg -hide_banner -i "$1" -c copy -bsf:a aac_adtstoasc "$2";
+}
+
 # function for printing specific details about a video in a specific show_format
 function ffinfo () {
 	if [ -z "$1" -o "$1" == "--help" ]; then
