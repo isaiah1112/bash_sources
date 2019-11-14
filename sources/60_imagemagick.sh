@@ -14,7 +14,7 @@ function mkcontactsheet() {
 			echo 'USAGE: mkcontactsheet <input...> <output>';
 			return 0;
 	fi
-	montage -geometry +5+5 -frame 5 $@;
+	montage -geometry 640x480\>+5+5 -frame 5 $@;
 	echo "Wrote file: ${@: -1}";
 }
 
