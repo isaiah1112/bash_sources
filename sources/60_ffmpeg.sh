@@ -55,7 +55,7 @@ function mkscreens () {
    echo 'Usage: mkscreens <file> [split]'
    return 0;
  fi
- mkdir screens;
+ mkdir screens 2>/dev/null;
  if [ -n "$2" ]; then
    ffmpeg -hide_banner -i "$1" -vf "fps=1/$2,drawtext=fontfile=/Library/Fonts/Arial.ttf:fontsize=45:fontcolor=yellow:box=1:boxcolor=black:x=(W-tw)/2:y=H-th-10:text='%{pts\:hms}'" screens/img%03d.jpg;
  else
