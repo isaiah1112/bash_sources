@@ -11,10 +11,10 @@ fi
 
 function mkcontactsheet() {
 	if [ -z "$1" -o "$1" == "--help" -o $# -lt 2 ]; then
-			echo 'USAGE: mkcontactsheet <title> <input> <output>';
+			echo 'USAGE: mkcontactsheet <input...> <output>';
 			return 0;
 	fi
-	montage -geometry +5+5 -tile 3x5 -frame 5 $@;
+	montage -geometry +5+5 -frame 5 $@;
 	echo "Wrote file: ${@: -1}";
 }
 
@@ -25,4 +25,13 @@ function mkcaption() {
 	fi
 	convert -size 1024x160 -background white -pointsize 25 -fill black -gravity NorthWest caption:"$1" -flatten "$2";
 	echo "Wrote file: $2"
+}
+
+function addheaderimg() {
+	if [ -z "$1" -o "$1" == "--help" -o $# -lt 3 ]; then
+			echo 'USAGE: addheaderimg <headerimg> <bodyimg> <output>';
+			return 0;
+	fi
+	convert -append -gravity NorthWest $@;
+	echo "Wrote file: ${@: -1}";
 }
