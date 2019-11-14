@@ -28,10 +28,10 @@ function ffinfo () {
 	fi
 	video_stats=$(ffprobe -v quiet -select_streams v:0 -show_entries stream=codec_name,height,bit_rate "$1");
 	echo Filename: "$1";
-	echo Format: $(echo "$video_stats" | grep -Eo 'h264|h265');
+	echo Format: $(echo "$video_stats" | grep -Eo 'h264|h265|mjpeg|wmv3');
 	echo Resolution: $(echo "$video_stats" | grep 'height' | grep -Eo '\d+')p;
 	echo Bitrate: $(( $(echo "$video_stats" | grep bit_rate | grep -Eo '\d+') / 1000))kb/s;
-	echo Filesize: $(ls -h | grep "$1" | awk '{print $5}');
+	echo Filesize: $(ls -h grep "$1" | awk '{print $5}');
 }
 
 # function for converting mkv to mp4 (container only)
