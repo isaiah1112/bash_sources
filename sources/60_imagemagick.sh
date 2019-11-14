@@ -32,6 +32,6 @@ function addheaderimg() {
 			echo 'USAGE: addheaderimg <headerimg> <bodyimg> <output>';
 			return 0;
 	fi
-	convert -append -gravity NorthWest $@;
+	convert -append -gravity NorthWest "$1" "$2" "$3";
 	echo "Wrote file: ${@: -1}";
 }
