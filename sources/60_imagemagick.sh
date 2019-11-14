@@ -10,12 +10,12 @@ if [ -z $(which montage 2> /dev/null) -a -z $(which convert 2> /dev/null) ]; the
 fi
 
 function mkcontactsheet() {
-	if [ -z "$1" -o "$1" == "--help" -o $# -ne 2 ]; then
-			echo 'USAGE: mkcontactsheet <input> <output>';
+	if [ -z "$1" -o "$1" == "--help" -o $# -lt 2 ]; then
+			echo 'USAGE: mkcontactsheet <title> <input> <output>';
 			return 0;
 	fi
-	montage -geometry +5+5 -tile 3x5 -frame 5 "$1" "$2";
-	echo "Wrote file: $2";
+	montage -geometry +5+5 -tile 3x5 -frame 5 $@;
+	echo "Wrote file: ${@: -1}";
 }
 
 function mkcaption() {
