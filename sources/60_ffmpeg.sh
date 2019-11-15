@@ -30,7 +30,7 @@ function ffinfo () {
 	echo Filename: "$1";
 	echo Format: $(echo "$video_stats" | grep -Eo 'h264|h265|mjpeg|wmv3');
 	echo Resolution: $(echo "$video_stats" | grep 'height' | grep -Eo '\d+')p;
-	if [ "$(echo "$video_stats" | grep bit_rate)" = "N/A" ]; then
+	if [ $(echo "$video_stats" | grep bit_rate | grep -Eo '\d+') = "N/A" ]; then
 		echo Bitrate: $(( $(echo "$video_stats" | grep bit_rate | grep -Eo '\d+') / 1000))kb/s;
 	fi
 	echo Filesize: $(ls -h "$1" | awk '{print $5}');
