@@ -14,7 +14,7 @@ function mkh265() {
 			return 0;
 	fi
   dest=$(echo "${1}" | rev | cut -d . -f2- | rev);
-  if [ "${2}" == "--1080p" ]; then
+  if [ "${2}" == "1080p" ]; then
     res="1080p";
   else
     res="720p";
