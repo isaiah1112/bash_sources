@@ -26,7 +26,7 @@ function ffinfo () {
 			echo 'USAGE: ffinfo <file>';
 			return 0;
 	fi
-	video_stats=$(ffprobe -v quiet -select_streams v:0 -show_entries stream=codec_name,height,bit_rate "$1");
+	video_stats=$(ffprobe -v quiet -select_streams v:0 -show_entries stream=codec_name,duration,height,bit_rate "$1");
 	bit_rate=$(echo "$video_stats" | grep bit_rate | grep -Eo '\d+');
 	echo Filename: "$1";
 	echo Format: $(echo "$video_stats" | grep -Eo 'h264|h265|mjpeg|wmv3');
@@ -34,6 +34,7 @@ function ffinfo () {
 	if [ -n "$bit_rate" ]; then
 		echo Bitrate: $(($bit_rate / 1000))kb/s;
 	fi
+	echo Duration: $(echo "$video_stats" | grep duration | grep -Eo '\d+\.\d+' | cut -d '.' -f1)s;
 	echo Filesize: $(ls -h "$1" | awk '{print $5}');
 }
 
