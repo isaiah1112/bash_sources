@@ -56,7 +56,7 @@ function mkv2mp4() {
 # function for building screencaptures every X seconds with timestamps
 function mkscreens () {
  if [ -z "$1" -o "$1" == "--help" ]; then
-   echo 'Usage: mkscreens <file> [split]'
+   echo 'Usage: mkscreens <file> [step]'
    return 0;
  fi
  mkdir screens 2>/dev/null;
@@ -70,7 +70,7 @@ function mkscreens () {
 # function for creating a gif preview of a media file
 function mkpreviewgif () {
   if [ -z "$1" -o "$1" == "--help" ]; then
-    echo 'Usage: mkpreviewgif <file> [--start|stop|step|length|fps|scale]'
+    echo 'Usage: mkpreviewgif <file> [--start|--stop|--step|--length|--fps|--scale]'
     return 0;
   fi
 	start=60;
