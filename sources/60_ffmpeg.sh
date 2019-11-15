@@ -31,8 +31,8 @@ function ffinfo () {
 	echo Filename: "$1";
 	echo Format: $(echo "$video_stats" | grep -Eo 'h264|h265|mjpeg|wmv3');
 	echo Resolution: $(echo "$video_stats" | grep 'height' | grep -Eo '\d+')p;
-	if [ "$bit_rate" != "N/A" ]; then
-		echo Bitrate: $(( $bit_rate / 1000))kb/s;
+	if [ -n "$bit_rate" ]; then
+		echo Bitrate: $(($bit_rate / 1000))kb/s;
 	fi
 	echo Filesize: $(ls -h "$1" | awk '{print $5}');
 }
