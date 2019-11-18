@@ -23,7 +23,7 @@ function mkcaption() {
 			echo 'USAGE: mkcaption <str> <file>';
 			return 0;
 	fi
-	convert -size 1024x160 -background white -pointsize 25 -fill black -gravity NorthWest caption:"$1" -flatten "$2";
+	convert -size 1024x200 -background white -pointsize 25 -fill black -gravity NorthWest caption:"$1" -flatten "$2";
 	echo "Wrote file: $2"
 }
 
