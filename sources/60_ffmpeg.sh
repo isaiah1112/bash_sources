@@ -53,6 +53,21 @@ function mkv2mp4() {
     ffmpeg -i "$mkvname" -c:v copy -c:a copy "$mp4name";
 }
 
+# function for converting avi to mp4 (container only)
+function avi2mp4() {
+    if [ -z "$1" -o "$1" == "--help" ]; then
+        echo 'USAGE: avi2mp4 <avi> [mp4]';
+        return 0;
+    fi
+    aviname=$1;
+    if [ -z "$2" ]; then
+        mp4name=$(echo "$aviname" | sed 's/\.avi/\.mp4/g');
+    else
+        mp4name=$2
+    fi
+    ffmpeg -i "$aviname" -c:v copy -c:a copy "$mp4name";
+}
+
 # function for building screencaptures every X seconds with timestamps
 function mkscreens () {
  if [ -z "$1" -o "$1" == "--help" ]; then
