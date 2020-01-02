@@ -42,6 +42,8 @@ else
     alias networksetup='sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Support/networksetup';
 fi
 alias md5q='md5 -q';
+alias plist2xml='plutil -convert xml1';
+alias plist2bin='plutil -convert binary1';
 alias softwareupdate='sudo softwareupdate';
 if [ -d /Applications/TextWrangler.app ]; then
     alias txtw="open -a 'TextWrangler'";
