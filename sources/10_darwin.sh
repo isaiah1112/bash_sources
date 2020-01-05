@@ -8,6 +8,9 @@ if [ $(uname) != "Darwin" ]; then
 	return 1;
 fi
 
+# In Catalina (10.15) bash is no longer the default shell.
+export BASH_SILENCE_DEPRECATION_WARNING=1;
+
 ## ENV Exports
 export OS_NAME=$(sw_vers -productName);
 export OS_VERSION=$(sw_vers -productVersion);
