@@ -1,6 +1,6 @@
 ### Bash Profile: Loader
 ### Author: Jesse Almanrode (jesse@almanrode.com)
-### Version: 1.3.1
+### Version: 1.4
 ### License: GNU GPLv3 (https://choosealicense.com/licenses/gpl-3.0/)
 
 if [ -z $HOME ]; then
