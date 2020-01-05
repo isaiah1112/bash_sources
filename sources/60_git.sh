@@ -8,9 +8,19 @@ if [ -z $(which git 2> /dev/null) ]; then
 	return 1;
 fi
 
-alias gitdiff='diff -burN';
-alias gitmod='git diff --cached --name-only --diff-filter=ACM';
-alias gitgrep='git log -p -q -S';
+alias gdiff='diff -burN';
+
+# git aliases
+git config --global alias.mod 'diff --cacheed --name-only --diff-filter=ACM';
+git config --global alias.grep 'log -p -q -S';
+git config --global alias.s status;
+git config --global alias.d diff;
+git config --global alias.co checkout;
+git config --global alias.br branch;
+git config --global alias.last 'log -1 HEAD';
+git config --global alias.cane 'commit --amend --no-edit';
+git config --global alias.pr 'pull --rebase';
+git config --global alias.lo 'log --oneline -n 10';
 
 function gitmerged() {
 if [ -d .git ]; then

@@ -8,6 +8,9 @@ if [ $(uname) != "Darwin" ]; then
 	return 1;
 fi
 
+# In Catalina (10.15) bash is no longer the default shell.
+export BASH_SILENCE_DEPRECATION_WARNING=1;
+
 ## ENV Exports
 export OS_NAME=$(sw_vers -productName);
 export OS_VERSION=$(sw_vers -productVersion);
@@ -42,6 +45,8 @@ else
     alias networksetup='sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Support/networksetup';
 fi
 alias md5q='md5 -q';
+alias plist2xml='plutil -convert xml1';
+alias plist2bin='plutil -convert binary1';
 alias softwareupdate='sudo softwareupdate';
 if [ -d /Applications/TextWrangler.app ]; then
     alias txtw="open -a 'TextWrangler'";
@@ -63,23 +68,6 @@ fi
 # If pdsh is installed, force it to use ssh
 if [ -n "$(which pdsh 2>/dev/null)" ]; then
     export PDSH_RCMD_TYPE=ssh;
-fi
-
-if [ -n "$(which ffmpeg 2> /dev/null)" ]; then
-	# if ffmpeg is installed, create a function for converting to mp4 containers
-    function mkv2mp4() {
-        if [ -z "$1" -o "$1" == "--help" ]; then
-            echo 'USAGE: mkv2mp4 <mkv> [mp4]';
-            return 0;
-        fi
-        mkvname=$1;
-        if [ -z "$2" ]; then
-            mp4name=$(echo "$mkvname" | sed 's/\.mkv/\.mp4/g');
-        else
-            mp4name=$2
-        fi
-        ffmpeg -i "$mkvname" -c:v copy -c:a copy "$mp4name";
-    }
 fi
 
 # Wrapper for sshfs that will create the mountpoint if it doesn't exist

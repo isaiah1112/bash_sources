@@ -9,8 +9,12 @@ if [ -z $(which HandBrakeCLI 2> /dev/null) ]; then
 fi
 
 function mkh265() {
+	if [ -z "$1" -o "$1" == "--help" ]; then
+			echo 'USAGE: mkh265 <input> [res]';
+			return 0;
+	fi
   dest=$(echo "${1}" | rev | cut -d . -f2- | rev);
-  if [ "${2}" == "--1080p" ]; then
+  if [ "${2}" == "1080p" ]; then
     res="1080p";
   else
     res="720p";
