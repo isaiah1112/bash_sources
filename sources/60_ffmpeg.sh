@@ -10,6 +10,7 @@ if [ -z $(which ffmpeg 2> /dev/null) ]; then
 fi
 
 alias ffjson='ffprobe -v quiet -print_format json -show_format -show_streams';
+alias ffplay='ffplay -loglevel quiet -autoexit';
 
 # function for downloading m3u8 content to an mp4 file
 function m3u8_download() {
