@@ -10,7 +10,7 @@ fi
 export PYTHON_VERSION=$(python --version 2>&1 | awk '{print $NF}');
 
 if [[ $PYTHON_VERSION == 3.* ]]; then
-    alias simplehttpserver='python -m html.server';
+    alias simplehttpserver='python -m http.server';
 else
     alias simplehttpserver='python -m SimpleHTTPServer';
 fi
