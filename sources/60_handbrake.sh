@@ -19,5 +19,5 @@ function mkh265() {
   else
     res="720p";
   fi
-  HandBrakeCLI -Z "H.265 MKV ${res}30" -i "${1}" -o "${dest}.mkv";
+  HandBrakeCLI -Z "Matroska/H.265 MKV ${res}30" -i "${1}" -o "${dest}.mkv";
 }
