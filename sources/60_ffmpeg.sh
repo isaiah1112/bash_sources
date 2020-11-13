@@ -83,6 +83,21 @@ function mkv2mp4() {
     ffmpeg -i "$mkvname" -c:v copy -c:a copy "$mp4name";
 }
 
+# function for converting mkv to wmv (container only)
+function mkv2wmv() {
+    if [ -z "$1" -o "$1" == "--help" ]; then
+        echo 'USAGE: mkv2wmv <mkv> [wmv]';
+        return 0;
+    fi
+    mkvname=$1;
+    if [ -z "$2" ]; then
+        wmvname=$(echo "$mkvname" | sed 's/\.mkv/\.wmv/g');
+    else
+        wmvname=$2
+    fi
+    ffmpeg -i "$mkvname" -c:v copy -c:a copy "$wmvname";
+}
+
 # function for converting avi to mp4 (container only)
 function avi2mp4() {
     if [ -z "$1" -o "$1" == "--help" ]; then
