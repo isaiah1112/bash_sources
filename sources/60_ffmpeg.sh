@@ -68,6 +68,15 @@ function ffinfo () {
 	echo Filesize: $(ls -h "$1" | awk '{print $5}');
 }
 
+# Function to return resolution of video
+ffsize () {
+	if [ -z "$1" -o "$1" == "--help" ]; then
+			echo 'USAGE: ffsize <file>';
+			return 0;
+	fi
+	ffprobe -v quiet -select_streams v:0 -show_entries stream=width,height "$1" | grep -v STREAM;
+}
+
 # function for converting mkv to mp4 (container only)
 function mkv2mp4() {
     if [ -z "$1" -o "$1" == "--help" ]; then
