@@ -1,0 +1,28 @@
+[core]
+	excludesfile = /Users/jalman177/.gitignore_global
+	editor = /usr/bin/vim
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[user]
+	name = Jesse Almanrode
+	email = jesse_almanrode@cable.comcast.com
+[commit]
+	template = /Users/jalman177/.stCommitMsg
+[alias]
+  filelog = log -p
+	mod = diff --cacheed --name-only --diff-filter=ACM
+	grep = log -p -q -S
+	s = status
+	d = diff
+	co = checkout
+	br = branch
+	last = log -1 HEAD
+	cane = commit --amend --no-edit
+	pr = pull --rebase
+	lo = log --oneline -n 10
+[pull]
+	rebase = true

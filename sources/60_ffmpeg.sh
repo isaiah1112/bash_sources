@@ -21,6 +21,35 @@ function m3u8_download() {
 	ffmpeg -hide_banner -i "$1" -c copy -bsf:a aac_adtstoasc "$2";
 }
 
+# function to create a timelapse video from a list of images
+function mktimelapse() {
+	if [ -z "$1" -o "$1" == "--help" ]; then
+		echo "USAGE: mktimelapse <files...> [fps] [preset]";
+		return 0;
+	fi
+	if [ -n "$2" ]; then
+		fps=$2;
+	else
+		fps=15;
+	fi
+	if [ -n "$3" ]; then
+		preset=$3;
+	else
+		preset='medium';
+	fi
+	ffmpeg -r $fps -pattern_type glob -i "$1" -vf "scale=1920:-1" -vcodec libx264 -preset $preset -crf 15 -pix_fmt yuv420p ./timelapse.mp4;
+}
+
+# create a timelapse video from a video file
+function mkvlapse() {
+	if [ -z "$1" -o "$1" == "--help"]; then
+		echo "USAGE: mkvlapse <file>";
+		return 0;
+	fi
+	name=$(echo "$1" | rev | cut -d '.' -f2- | rev);
+	ffmpeg -i "$1" -filter:v "setpts=0.5*PTS" -an ${name}_timelapse.mp4;
+}
+
 # function for printing specific details about a video in a specific show_format
 function ffinfo () {
 	if [ -z "$1" -o "$1" == "--help" ]; then
@@ -39,6 +68,15 @@ function ffinfo () {
 	echo Filesize: $(ls -h "$1" | awk '{print $5}');
 }
 
+# Function to return resolution of video
+ffsize () {
+	if [ -z "$1" -o "$1" == "--help" ]; then
+			echo 'USAGE: ffsize <file>';
+			return 0;
+	fi
+	ffprobe -v quiet -select_streams v:0 -show_entries stream=width,height "$1" | grep -v STREAM;
+}
+
 # function for converting mkv to mp4 (container only)
 function mkv2mp4() {
     if [ -z "$1" -o "$1" == "--help" ]; then
@@ -52,6 +90,21 @@ function mkv2mp4() {
         mp4name=$2
     fi
     ffmpeg -i "$mkvname" -c:v copy -c:a copy "$mp4name";
+}
+
+# function for converting mkv to wmv (container only)
+function mkv2wmv() {
+    if [ -z "$1" -o "$1" == "--help" ]; then
+        echo 'USAGE: mkv2wmv <mkv> [wmv]';
+        return 0;
+    fi
+    mkvname=$1;
+    if [ -z "$2" ]; then
+        wmvname=$(echo "$mkvname" | sed 's/\.mkv/\.wmv/g');
+    else
+        wmvname=$2
+    fi
+    ffmpeg -i "$mkvname" -c:v copy -c:a copy "$wmvname";
 }
 
 # function for converting avi to mp4 (container only)
