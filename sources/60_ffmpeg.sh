@@ -12,6 +12,15 @@ fi
 alias ffjson='ffprobe -v quiet -print_format json -show_format -show_streams';
 alias ffplay='ffplay -loglevel quiet -autoexit';
 
+# Reverse a video clip
+function ffreverse() {
+	if [ -z "$1" -o "$1" == "--help" ]; then
+			echo 'USAGE: ffreverse <file>';
+			return 0;
+	fi
+	ffmpeg -i "$1" -vf reverse -af areverse "reversed_$1";
+}
+
 # function for downloading m3u8 content to an mp4 file
 function m3u8_download() {
 	if [ -z "$1" -o "$1" == "--help" ]; then
