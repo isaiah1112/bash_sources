@@ -15,33 +15,3 @@ else
     alias simplehttpserver='python -m SimpleHTTPServer';
 fi
 alias json='python -m json.tool';
-
-function pipclean() {
-if [ ! -f ./requirements.txt ]; then
-    echo "requirements.txt file does not exist in $(pwd)";
-else
-    pip freeze | grep -v -f requirements.txt | xargs pip uninstall -y
-fi
-}
-
-function pypi() {
-case $1 in
-    register)
-        if [ ! -f setup.py ]; then
-            echo "Unable to find setup.py in $(pwd)";
-        else
-            python setup.py register;
-        fi
-    ;;
-    upload)
-        if [ ! -f setup.py ]; then
-            echo "Unable to find setup.py in $(pwd)";
-        else
-            python setup.py sdist upload;
-        fi
-    ;;
-    *)
-        echo "USAGE: pypi [--help|register|upload]";
-    ;;
-esac
-}
