@@ -28,11 +28,8 @@ alias cp='cp -r';
 alias cls='clear';
 alias df='df -kh';
 alias dfgrp='df | grep -i';
-alias digme='dig $HOSTNAME +short';
-alias digx='dig -x';
 alias du='sudo du -shx';
 alias e='exit';
-alias edithosts="sudo $EDITOR $HOSTS";
 alias fu='sudo `history | tail -n2 | head -n1 | tr -s " " | cut -d " " -f3-`';
 alias grepi='grep -i';
 alias grepcfg='grep -v -E "^#|^$"';
@@ -45,18 +42,13 @@ alias lns='ln -sfn';
 alias lagrp='la | grep';
 alias lsgrp='ls | grep';
 alias portgrp='sudo netstat -lp | grep -i';
-# For quick registering and uploading to PyPi
-alias resolv='sudo $EDITOR /etc/resolv.conf';
 alias rm='rm -r';
 alias sgrep='sudo grep';
 alias ssu='sudo su -';
-alias sshr='sudo ssh';
 alias stail='sudo tail';
 alias svi='sudo $EDITOR';
 alias vi='$EDITOR'
 alias vimrc='$EDITOR ~/.vimrc';
-alias visudo="sudo visudo";
-alias tracert='traceroute';
 alias wcl='wc -l';
 
 ######### Universal bash functions

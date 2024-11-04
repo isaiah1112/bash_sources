@@ -18,12 +18,16 @@ export LESS='-R -F -X $LESS';
 
 ## Aliases
 alias bandwidth_stats="top -l 1 | grep Networks | sed 's/[0-9]*\///g' | sed 's/ packets://g'";
-alias bandwidth_stats_live="netstat -w1 -I";
+function bandwidth_stats_live() {
+	if [ -z "$1" ]; then
+		echo "Please enter a network interface to watch";
+	fi
+	netstat -w1 -I $1;
+}
 alias cp='cp -rp';
 if [ -d /Applications/Google\ Chrome.app ]; then
     alias chrome='open -a "Google Chrome"';
 fi
-alias empty_trash='rm ~/.Trash/* 2>/dev/null';
 alias fdisk='fdisk -cu';
 if [ -d /Applications/Firefox.app ]; then
     alias firefox='open -a "Firefox"';
@@ -48,9 +52,6 @@ alias md5q='md5 -q';
 alias plist2xml='plutil -convert xml1';
 alias plist2bin='plutil -convert binary1';
 alias softwareupdate='sudo softwareupdate';
-if [ -d /Applications/TextWrangler.app ]; then
-    alias txtw="open -a 'TextWrangler'";
-fi
 
 # Do macports stuff (if installed)
 if [ -f /opt/local/bin/port ]; then
