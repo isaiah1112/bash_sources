@@ -9,6 +9,7 @@ if [ -z $(which git 2> /dev/null) ]; then
 fi
 
 alias gdiff='diff -burN';
+git config --global pull.rebase true
 
 # git aliases
 git config --global alias.mod 'diff --cacheed --name-only --diff-filter=ACM';
