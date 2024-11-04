@@ -87,8 +87,6 @@ if [ -d .git ]; then
             echo "## Release $2";
         fi
         # The markdown links are still not working as nicely as I'd like.  Due to commits vs commit.
-        #ORIGIN=$(git config --get remote.origin.url | tr ':' '/' | sed 's/\.git$//' | sed -E 's/^.*?@//');
-        #git shortlog --no-merges refs/tags/${last_release}..${this_release} --format="* %s [%h](${ORIGIN}/commit/%H)" | sed 's/      / /';
         git shortlog --no-merges refs/tags/${last_release}..${this_release} --format="* %s [%h]" | sed 's/      / /';
     fi
 fi
