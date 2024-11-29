@@ -16,3 +16,6 @@ function stardate() {
 		date +%Y%d.%m | sed 's/\.0*/\./';
 	fi
 }
+
+# Aliases
+alias fu='sudo `history | tail -n2 | head -n1 | tr -s " " | cut -d " " -f3-`';

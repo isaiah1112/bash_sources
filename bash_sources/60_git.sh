@@ -5,10 +5,11 @@
 
 if [ -z $(which git 2> /dev/null) ]; then
 	echo "git is not installed. Not loading source.";
-	return 1;
+	exit 1;
 fi
 
 alias gdiff='diff -burN';
+# ensure we always rebase on a 'git pull'
 git config --global pull.rebase true
 
 # git aliases

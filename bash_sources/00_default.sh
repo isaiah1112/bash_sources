@@ -26,21 +26,16 @@ if [ -n $(which apg 2>/dev/null) ]; then
 fi
 alias cp='cp -r';
 alias cls='clear';
-alias df='df -kh';
-alias dfgrp='df | grep -i';
-alias du='sudo du -shx';
+alias df='df -h';
+alias du='du -shx';
 alias e='exit';
-alias fu='sudo `history | tail -n2 | head -n1 | tr -s " " | cut -d " " -f3-`';
 alias grepi='grep -i';
 alias grepcfg='grep -v -E "^#|^$"';
 alias hg='history | grep -i';
 alias hostgrp="cat $HOSTS | grep -i ";
 alias la='ls -lAh';
-alias ll='ls -lArt';
 alias ls='ls -lh';
 alias lns='ln -sfn';
-alias lagrp='la | grep';
-alias lsgrp='ls | grep';
 alias portgrp='sudo netstat -lp | grep -i';
 alias rm='rm -r';
 alias sgrep='sudo grep';

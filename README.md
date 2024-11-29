@@ -1,12 +1,11 @@
 # Welcome
 
-Thank you for taking the time to check out bash_sources.  This is my attempt to create a functional bash environment without
-creating a single monolithic **bash\_profile** file.  I've been in IT over 15 years and decided it was time to make a bash\_profile
-system that worked well and was easy to extend!
+Thank you for taking the time to check out bash_sources.  This is my attempt to create a modular bash environment with a minimalistic
+**bashrc** file.  Since I've worked in IT for over 20 years I figured it was time I put some of my knowledge to good use.
 
 # Installation
 
-To install bash\_sources, simply rename or symlink the **loader.sh** file to your **~/.bash\_profile**:
+To install this project, simply run the `install.sh` file:
 
 	ln -s <bash_sources_repo>/loader.sh ~/.bash_profile
 
