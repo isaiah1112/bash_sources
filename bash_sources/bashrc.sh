@@ -35,21 +35,10 @@ case $1 in
 	reload)
 		source $HOME/.bash_profile;
 	;;
-	load)
-		if [ -z $2 ]; then
-			echo 'profile load <source>';
-		else
-			if [ -f $BASH_SOURCES/$2 ]; then
-				source $BASH_SOURCES/$2;
-			else
-				echo "Unable to load $BASH_SOURCES/$2";
-			fi
-		fi
-	;;
 	list)
 		ls -1 $BASH_SOURCES/;
 	;;
 	*)
-		echo 'profile [edit|reload|load|view|list]';
+		echo 'profile [edit|reload|view|list]';
 esac
 }
