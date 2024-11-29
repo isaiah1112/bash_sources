@@ -60,10 +60,11 @@ function repoup() {
 	if [ "$1" == "--help" -o "$1" == "-h" ]; then
 		echo "Run git pull in all repos under $(pwd)";
 	else
+        LNBREAK="----------------";
 		for dir in $(find . -maxdepth 2 -type d -name .git | cut -d '/' -f2); do
 			if [ -d ${dir}/.git ]; then
 				cd ${dir};
-				echo -e "----------------\n${dir}\n----------------";
+				echo -e "${LNBREAK}\n${dir}\n${LNBREAK}";
 				git pull;
 				cd ..;
 			fi
@@ -74,7 +75,7 @@ function repoup() {
 function git_release_notes () {
 if [ -d .git ]; then
     if [ "$1" == "--help" -o "$1" == "-h" ]; then
-        echo "USAGE: git_release_notes [starting_tag] [ending_tag]";
+        echo "USAGE: git_release_notes [start_tag] [end_tag]";
     else
         if [ -z "$1" ]; then
             last_release=$(git tag | tail -1);
@@ -83,10 +84,10 @@ if [ -d .git ]; then
         fi
         if [ -z "$2" ]; then
             this_release="";
-            echo "## Release" $(git branch | grep '^*' | awk '{print $NF}');
+            echo "# Release" $(git branch | grep '^*' | awk '{print $NF}');
         else
             this_release="refs/tags/$2";
-            echo "## Release $2";
+            echo "# Release $2";
         fi
         # The markdown links are still not working as nicely as I'd like.  Due to commits vs commit.
         git shortlog --no-merges refs/tags/${last_release}..${this_release} --format="* %s [%h]" | sed 's/      / /';
