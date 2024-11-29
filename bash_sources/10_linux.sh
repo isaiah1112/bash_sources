@@ -5,7 +5,7 @@
 
 if [ $(uname) != "Linux" ]; then
 	echo "Not running Linux. Not loading source.";
-	return 1;
+	exit 1;
 fi
 
 # Exports

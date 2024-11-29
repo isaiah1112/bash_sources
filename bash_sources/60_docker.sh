@@ -5,7 +5,7 @@
 
 if [ -z $(which docker 2> /dev/null) ]; then
 	echo "docker is not installed. Not loading source.";
-	return 1;
+	exit 1;
 fi
 
 alias docker_clean_images="docker rmi $(docker images -a --filter=dangling=true -q)";

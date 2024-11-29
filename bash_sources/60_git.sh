@@ -29,7 +29,7 @@ if [ -d .git ]; then
     if [ "$1" == "--help" -o "$1" == "-h" ]; then
         echo "List and delete branches in git that have been merged to master";
         echo "USAGE: gitmerge [--delete]";
-        return 0;
+        exit 0;
     elif [ "$1" == "--delete" ] ; then
         git branch -r --merged origin/master | grep -v "^.*master" | grep -v "^.*upstream" | grep -v "^.*develop" | sed s:origin/:: | xargs -n 1 git push origin --delete;
     else
@@ -37,7 +37,7 @@ if [ -d .git ]; then
     fi
 else
     echo "Not a git repository";
-    return 1;
+    exit 1;
 fi
 }
 
