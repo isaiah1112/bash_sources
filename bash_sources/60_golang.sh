@@ -5,6 +5,6 @@
 
 if [ -z $(which go 2> /dev/null) ]; then
 	echo "golang is not installed. Not loading source.";
-	exit 1;
+	return 1;
 fi
 export PATH=$PATH:$HOME/go/bin;

@@ -11,7 +11,7 @@ if [ -d $BASH_SOURCES ]; then
 	done
 else
 	echo "Please run 'install.sh bashrc'";
-	exit 1;
+	return 1;
 fi
 
 ## Functions that make the loader tick

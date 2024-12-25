@@ -5,7 +5,7 @@
 
 if [ -z $(which git 2> /dev/null) ]; then
 	echo "git is not installed. Not loading source.";
-	exit 1;
+	return 1;
 fi
 
 alias gdiff='diff -burN';

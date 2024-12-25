@@ -5,7 +5,7 @@
 
 if [ $(uname) != "Darwin" ]; then
 	echo "Not running Darwin. Skipping source.";
-	exit 1;
+	return 1;
 fi
 
 # In Catalina (10.15) bash is no longer the default shell.

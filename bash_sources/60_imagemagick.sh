@@ -6,13 +6,13 @@
 
 if [ -z $(which montage 2> /dev/null) -a -z $(which convert 2> /dev/null) ]; then
 	echo "ImageMagick is not installed. Not loading source.";
-	exit 1;
+	return 1;
 fi
 
 function mkcontactsheet() {
 	if [ -z "$1" -o "$1" == "--help" -o $# -lt 2 ]; then
 			echo 'USAGE: mkcontactsheet <input...> <output>';
-			exit 0;
+			return 0;
 	fi
 	montage -geometry 640x480\>+5+5 -frame 5 $@;
 	echo "Wrote file: ${@: -1}";
@@ -21,7 +21,7 @@ function mkcontactsheet() {
 function mkcaption() {
 	if [ -z "$1" -o "$1" == "--help" -o $# -ne 2 ]; then
 			echo 'USAGE: mkcaption <str> <file>';
-			exit 0;
+			return 0;
 	fi
 	convert -size 1024x200 -background white -pointsize 25 -fill black -gravity NorthWest caption:"$1" -flatten "$2";
 	echo "Wrote file: $2"
@@ -30,7 +30,7 @@ function mkcaption() {
 function addheaderimg() {
 	if [ -z "$1" -o "$1" == "--help" -o $# -lt 3 ]; then
 			echo 'USAGE: addheaderimg <headerimg> <bodyimg> <output>';
-			exit 0;
+			return 0;
 	fi
 	convert -append -gravity NorthWest "$1" "$2" "$3";
 	echo "Wrote file: ${@: -1}";

@@ -5,13 +5,13 @@
 
 if [ -z $(which HandBrakeCLI 2> /dev/null) ]; then
 	echo "HandBrakeCLI is not installed. Not loading source.";
-	exit 1;
+	return 1;
 fi
 
 function mkh265() {
 	if [ -z "$1" -o "$1" == "--help" ]; then
 			echo 'USAGE: mkh265 <input> [res]';
-			exit 0;
+			return 0;
 	fi
   dest=$(echo "${1}" | rev | cut -d . -f2- | rev);
   if [ "${2}" == "1080p" ]; then

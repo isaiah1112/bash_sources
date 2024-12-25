@@ -6,7 +6,7 @@
 
 if [ -z $(which ffmpeg 2> /dev/null) ]; then
 	echo "ffmpeg is not installed. Not loading source.";
-	exit 1;
+	return 1;
 fi
 
 alias ffjson='ffprobe -v quiet -print_format json -show_format -show_streams';

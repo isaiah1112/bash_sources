@@ -5,7 +5,7 @@
 
 if [ -z $(which python 2>/dev/null) ]; then
     echo "python is not installed. Not loading source.";
-    exit 1;
+    return 1;
 fi
 export PYTHON_VERSION=$(python --version 2>&1 | awk '{print $NF}');
 
