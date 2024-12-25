@@ -7,6 +7,10 @@ if [ -z "$(which python 2>/dev/null)" ]; then
     echo "python is not installed. Not loading source.";
     return 1;
 fi
+
+# Python Poetry
+export PATH="/Users/jesse/.local/bin:$PATH";
+# Env
 export PYTHON_VERSION=$(python --version 2>&1 | awk '{print $NF}');
 
 if [[ $PYTHON_VERSION == 3.* ]]; then
