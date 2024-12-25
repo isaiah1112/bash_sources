@@ -3,7 +3,7 @@
 ### License: GNU GPLv3 (https://choosealicense.com/licenses/gpl-3.0/)
 ### Aliases and functions which load if you have Python installed
 
-if [ -z $(which python 2>/dev/null) ]; then
+if [ -z "$(which python 2>/dev/null)" ]; then
     echo "python is not installed. Not loading source.";
     return 1;
 fi
