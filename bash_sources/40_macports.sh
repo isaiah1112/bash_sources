@@ -10,6 +10,8 @@ fi
 
 # Update PATH to include MacPorts
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH";
+# Use GNU toosl
+# export PATH="/opt/local/libexec/gnubin/:$PATH";
 
 # Add aliases for MacPorts
 alias portupdate="sudo port selfupdate && sudo port upgrade outdated";
