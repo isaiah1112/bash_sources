@@ -1,14 +1,17 @@
 #!/bin/bash
 # Install the bash_sources loader and setup our environment
 
-
 if [ -z "$1" ]; then
     echo "USAGE: install.sh [bashrc|vimrc|sshcfg|<source>]";
     exit 0;
 elif [ "$1" == "bashrc" ]; then
+    if [ -f $HOME/.bash_profile.pre-bash_sources ]; then
+        echo "bashrc already installed.  Please run 'profile reload' to load the new sources.";
+        exit 0;
+    fi
     # Backup and install bashrc
-    mv $HOME/.bash_profile $HOME/.bash_profile.pre-bash_sources 2>/dev/null;
-    mv $HOME/.bashrc $HOME/.bashrc.pre-bash_sources 2>/dev/null;
+    cp $HOME/.bash_profile $HOME/.bash_profile.pre-bash_sources 2>/dev/null;
+    cp $HOME/.bashrc $HOME/.bashrc.pre-bash_sources 2>/dev/null;
     ln -snf $(pwd)/bash_sources/bash_profile.sh $HOME/.bash_profile;
     ln -snf $(pwd)/bash_sources/bashrc.sh $HOME/.bashrc;
     mkdir -p $HOME/.bash_sources.d;
@@ -16,14 +19,22 @@ elif [ "$1" == "bashrc" ]; then
     echo "bash_sources bashrc installed.  Please reload your terminal.";
     exit 0;
 elif [ "$1" == "vimrc" ]; then
+    if [ -f $HOME/.vimrc.pre-bash_sources ]; then
+        echo "vimrc already installed.";
+        exit 0;
+    fi
     # Backup and install vimrc
-    mv $HOME/.vimrc $HOME/.vimrc.pre-bash_sources 2> /dev/null;
+    cp $HOME/.vimrc $HOME/.vimrc.pre-bash_sources 2> /dev/null;
     ln -snf $(pwd)/vimrc $HOME/.vimrc;
     echo "vimrc installed";
     exit 0;
 elif [ "$1" == "sshcfg" ]; then
+    if [ -f $HOME/.ssh/config.pre-bash_sources ]; then
+        echo "ssh config already installed.";
+        exit 0;
+    fi
     # Backup and install ssh config
-    mv $HOME/.ssh/config $HOME/.ssh/config.pre-bash_sources 2>/dev/null;
+    cp $HOME/.ssh/config $HOME/.ssh/config.pre-bash_sources 2>/dev/null;
     ln -snf $(pwd)/ssh/config $HOME/.ssh/config;
     echo "ssh config installed";
     exit 0;
