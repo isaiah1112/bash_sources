@@ -44,3 +44,10 @@ I've also included my `vimrc` and `ssh` config files. To install them simply:
 
 	./install.sh vimrc
 	./install.sh sshcfg
+
+# Upgrading from a previous version
+
+When upgrading from a pre-v2.X version of bash_sources, perform the following:
+
+	unlink ~/.bash_profile;
+	rm ~/.sources.d; # Optional. If you have non-linked sources in here move them to the new ~/.bash_sources.d directory before deleting this one.
