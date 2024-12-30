@@ -1,4 +1,4 @@
-### Bash Profile: Fun Stuff
+### Fun Stuff
 ### Author: Jesse Almanrode (https://about.me/JesseAlmanrode)
 ### License: GNU GPLv3 (https://choosealicense.com/licenses/gpl-3.0/)
 ### Just a bunch of "fun" things you can add to your bash profile

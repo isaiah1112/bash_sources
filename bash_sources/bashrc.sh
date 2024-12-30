@@ -1,4 +1,3 @@
-### bash_sources.sh
 ### Author: Jesse Almanrode (jesse@almanrode.com)
 ### License: GNU GPLv3 (https://choosealicense.com/licenses/gpl-3.0/)
 
