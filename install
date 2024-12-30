@@ -42,6 +42,10 @@ else
     # Install the requested bash source
     if [ -d $HOME/.bash_sources.d ]; then
         if [ -f $(pwd)/bash_sources/$1 ]; then
+            if [ "$1" == "bash_profile.sh" ] || [ "$1" == "bashrc.sh" ]; then
+                echo "Please run 'install.sh bashrc' to install the bashrc loader.";
+                exit 1;
+            fi
             ln -snf $(pwd)/bash_sources/$1 $HOME/.bash_sources.d/$1;
             echo "$1 bash source installed.";
             echo "Please run 'profile reload' to load this new source.";
