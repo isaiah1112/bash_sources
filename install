@@ -1,0 +1,57 @@
+#!/bin/bash
+# Install the bash_sources loader and setup our environment
+
+if [ -z "$1" ]; then
+    echo "USAGE: install.sh [bashrc|vimrc|sshcfg|<source>]";
+    exit 0;
+elif [ "$1" == "bashrc" ]; then
+    if [ -f $HOME/.bash_profile.pre-bash_sources ]; then
+        echo "bashrc already installed.  Please run 'profile reload' to load the new sources.";
+        exit 0;
+    fi
+    # Backup and install bashrc
+    cp $HOME/.bash_profile $HOME/.bash_profile.pre-bash_sources 2>/dev/null;
+    cp $HOME/.bashrc $HOME/.bashrc.pre-bash_sources 2>/dev/null;
+    ln -snf $(pwd)/bash_sources/bash_profile.sh $HOME/.bash_profile;
+    ln -snf $(pwd)/bash_sources/bashrc.sh $HOME/.bashrc;
+    mkdir -p $HOME/.bash_sources.d;
+    ln -snf $(pwd)/bash_sources/00_default.sh $HOME/.bash_sources.d/00_default.sh;
+    echo "bash_sources bashrc installed.  Please reload your terminal.";
+    exit 0;
+elif [ "$1" == "vimrc" ]; then
+    if [ -f $HOME/.vimrc.pre-bash_sources ]; then
+        echo "vimrc already installed.";
+        exit 0;
+    fi
+    # Backup and install vimrc
+    cp $HOME/.vimrc $HOME/.vimrc.pre-bash_sources 2> /dev/null;
+    ln -snf $(pwd)/vimrc $HOME/.vimrc;
+    echo "vimrc installed";
+    exit 0;
+elif [ "$1" == "sshcfg" ]; then
+    if [ -f $HOME/.ssh/config.pre-bash_sources ]; then
+        echo "ssh config already installed.";
+        exit 0;
+    fi
+    # Backup and install ssh config
+    cp $HOME/.ssh/config $HOME/.ssh/config.pre-bash_sources 2>/dev/null;
+    ln -snf $(pwd)/ssh/config $HOME/.ssh/config;
+    echo "ssh config installed";
+    exit 0;
+else
+    # Install the requested bash source
+    if [ -d $HOME/.bash_sources.d ]; then
+        if [ -f $(pwd)/bash_sources/$1 ]; then
+            ln -snf $(pwd)/bash_sources/$1 $HOME/.bash_sources.d/$1;
+            echo "$1 bash source installed.";
+            echo "Please run 'profile reload' to load this new source.";
+            exit 0;
+        else
+            echo "Unable to find $1 in bash_sources directory. Try again.";
+            exit 1;
+        fi
+    else
+        echo "Please run 'install.sh bashrc' and try again.";
+        exit 1;
+    fi
+fi

@@ -1,4 +1,4 @@
-### Bash Profile: Linux Additions
+### Linux specific settings
 ### Author: Jesse Almanrode (https://about.me/JesseAlmanrode)
 ### License: GNU GPLv3 (https://choosealicense.com/licenses/gpl-3.0/)
 ### Aliases and functions specific to Linux flavors of UNIX (RedHat/CentOS/Ubuntu)

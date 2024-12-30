@@ -1,10 +1,12 @@
-### Bash Profile: Fun Stuff
+### Fun Stuff
 ### Author: Jesse Almanrode (https://about.me/JesseAlmanrode)
 ### License: GNU GPLv3 (https://choosealicense.com/licenses/gpl-3.0/)
 ### Just a bunch of "fun" things you can add to your bash profile
 
 # Play ascii starwars
-alias starwars='telnet towel.blinkenlights.nl';
+if [ -n "$(which telnet)"]; then
+  alias starwars='telnet towel.blinkenlights.nl';
+fi
 
 # Print the current startdate
 function stardate() {
@@ -15,11 +17,5 @@ function stardate() {
 	fi
 }
 
-function lgtm() {
-  mrkdown=$(curl -s -k -L -A "Mozilla/5.0"  "http://www.lgtm.in/g"  | grep -A 1 markdown | grep LGTM | cut -d ">" -f2);
-  if [ "${1}" == "--url" ]; then
-    echo ${mrkdown} | cut -d '(' -f2 | cut -d ')' -f1;
-  else
-    echo ${mrkdown};
-  fi
-}
+# Aliases
+alias fu='sudo `history | tail -n2 | head -n1 | tr -s " " | cut -d " " -f3-`';
