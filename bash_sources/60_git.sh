@@ -73,6 +73,7 @@ function repoup() {
 }
 
 function git_release_notes () {
+  # Generate release notes from git log entries (I know this isn't best practice but whatever).
 if [ -d .git ]; then
     if [ "$1" == "--help" -o "$1" == "-h" ]; then
         echo "USAGE: git_release_notes [start_tag] [end_tag]";
@@ -93,4 +94,17 @@ if [ -d .git ]; then
         git shortlog --no-merges refs/tags/${last_release}..${this_release} --format="* %s [%h]" | sed 's/      / /';
     fi
 fi
+}
+
+function git_mirror() {
+  # Mirror a repo from one origin to another (for migration purposes).
+  if [ "$1" == "--help" -o "$1" == "-h" -o $# -ne 2 ]; then
+    echo "USAGE: git_mirror <src_repo_url> <dst_repo_url>";
+  else
+    echo "Cloaning repo $1";
+    repo=$(basename $1);
+    git clone --mirror $1;
+    echo "Mirroring to $2";
+    cd $repo && git remote set-url origin $2 && git push --mirror origin && cd ..;
+  fi
 }
