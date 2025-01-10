@@ -43,7 +43,7 @@ else
     if [ -d $HOME/.bash_sources.d ]; then
         if [ -f $(pwd)/bash_sources/$1 ]; then
             if [ "$1" == "bash_profile.sh" ] || [ "$1" == "bashrc.sh" ]; then
-                echo "Please run 'install.sh bashrc' to install the bashrc loader.";
+                echo "Please run 'install.sh bashrc' to install the bashrc loaders.";
                 exit 1;
             fi
             ln -snf $(pwd)/bash_sources/$1 $HOME/.bash_sources.d/$1;
