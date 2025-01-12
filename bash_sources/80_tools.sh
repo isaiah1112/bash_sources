@@ -12,14 +12,14 @@ function myip() {
 }
 
 # Reverse SSH Tunnel for SOCKS proxy on port 8080
+alias tunnel="ssh -D 8080 -f -C -q -N";
+alias lstunnel="ps aux | grep '[s]sh' | grep '\-D 8080'";
 function ktunnel() {
 pids=$(ps aux | grep '[s]sh' | grep '\-D 8080' | awk '{print $2}');
 if [ -n ${pids} ]; then
     kill ${pids};
 fi
 }
-alias lstunnel="ps aux | grep '[s]sh' | grep '\-D 8080'";
-alias tunnel='ssh -D 8080 -f -C -q -N';
 
 # Create and mount a RAM disk
 function mkramdisk() {
