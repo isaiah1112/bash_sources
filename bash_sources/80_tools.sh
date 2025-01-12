@@ -20,3 +20,23 @@ fi
 }
 alias lstunnel="ps aux | grep '[s]sh' | grep '\-D 8080'";
 alias tunnel='ssh -D 8080 -f -C -q -N';
+
+# Create and mount a RAM disk
+function mkramdisk() {
+    if [ -z "$1" -o "$1" == "--help" -o "$1" == "-h" ]; then
+          echo "Usage: mkramdisk <size in MB>";
+          return 1;
+      fi
+    if [ "$(uname)" != "Darwin" ]; then  # Running OS X
+      size=$(bc <<< "$1 * 1024 * 1024 / 512");  # Size is in 512-byte blocks
+      diskutil erasevolume HFS+ "RAMDisk" $(hdiutil attach -nomount ram://${size});
+    else  # Running Linux
+      if [ -z "$2" ]; then
+          echo "Usage: mkramdisk <size in MB> <mount point>";
+          return 1;
+      fi
+      size=$1;
+      mount_point=$2;
+      sudo mount -t tmpfs -o size=${size}m tmpfs ${mount_point};
+    fi
+}
