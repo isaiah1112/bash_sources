@@ -3,12 +3,8 @@
 ### License: GNU GPLv3 (https://choosealicense.com/licenses/gpl-3.0/)
 
 function myip() {
-    ipv6=$(curl -s 'http://ip6.me/' | grep -A 1 'Address of' | cut -d '>' -f4 | cut -d '<' -f1);
-    echo ${ipv6} | sed 's/ /: /'; 
-    if [ -n "$(echo ${ipv6} | grep 'IPv6')" ]; then
-      ipv4=$(curl -s 'http://ip4.me/' | grep -A 1 'Address of' | cut -d '>' -f4 | cut -d '<' -f1);
-      echo ${ipv4} | sed 's/ /: /';
-    fi
+    curl -s 'http://ip6only.me/api/' | cut -d ',' -f1,2 | sed 's/,/: /';
+    curl -s 'http://ip4.me/api/' | cut -d ',' -f1,2 | sed 's/,/: /';
 }
 
 # Reverse SSH Tunnel for SOCKS proxy on port 8080
