@@ -9,7 +9,7 @@ if [ -z $(which HandBrakeCLI 2> /dev/null) ]; then
 fi
 
 function mkh265() {
-	if [ -z "$1" -o "$1" == "--help" ]; then
+	if [ -z "$1" -o "$1" == "--help" -o $# -lt 1 -o $# -gt 2 ]; then
 			echo 'USAGE: mkh265 <input> [res]';
 			return 0;
 	fi

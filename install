@@ -40,18 +40,19 @@ elif [ "$1" == "sshcfg" ]; then
     exit 0;
 else
     # Install the requested bash source
+    src=$(basename $1);
     if [ -d $HOME/.bash_sources.d ]; then
-        if [ -f $(pwd)/bash_sources/$1 ]; then
-            if [ "$1" == "bash_profile.sh" ] || [ "$1" == "bashrc.sh" ]; then
+        if [ -f $(pwd)/bash_sources/$src ]; then
+            if [ "$src" == "bash_profile.sh" ] || [ "$src" == "bashrc.sh" ]; then
                 echo "Please run 'install.sh bashrc' to install the bashrc loaders.";
                 exit 1;
             fi
-            ln -snf $(pwd)/bash_sources/$1 $HOME/.bash_sources.d/$1;
-            echo "$1 bash source installed.";
+            ln -snf $(pwd)/bash_sources/$src $HOME/.bash_sources.d/$src;
+            echo "$src bash source installed.";
             echo "Please run 'profile reload' to load this new source.";
             exit 0;
         else
-            echo "Unable to find $1 in bash_sources directory. Try again.";
+            echo "Unable to find $src in bash_sources directory. Try again.";
             exit 1;
         fi
     else
