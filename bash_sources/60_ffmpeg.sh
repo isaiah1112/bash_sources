@@ -16,7 +16,7 @@ alias ffplay='ffplay -loglevel quiet -autoexit';
 function ffreverse() {
 	if [ -z "$1" -o "$1" == "--help" ]; then
 			echo 'USAGE: ffreverse <file>';
-			exit 0;
+			return 0;
 	fi
 	ffmpeg -i "$1" -vf reverse -af areverse "reversed_$1";
 }
@@ -25,7 +25,7 @@ function ffreverse() {
 function m3u8_download() {
 	if [ -z "$1" -o "$1" == "--help" ]; then
 			echo 'USAGE: m3u8_download <url> <file>';
-			exit 0;
+			return 0;
 	fi
 	ffmpeg -hide_banner -i "$1" -c copy -bsf:a aac_adtstoasc "$2";
 }
@@ -34,7 +34,7 @@ function m3u8_download() {
 function mktimelapse() {
 	if [ -z "$1" -o "$1" == "--help" ]; then
 		echo "USAGE: mktimelapse <files...> [fps] [preset]";
-		exit 0;
+		return 0;
 	fi
 	if [ -n "$2" ]; then
 		fps=$2;
@@ -53,7 +53,7 @@ function mktimelapse() {
 function mkvlapse() {
 	if [ -z "$1" -o "$1" == "--help"]; then
 		echo "USAGE: mkvlapse <file>";
-		exit 0;
+		return 0;
 	fi
 	name=$(echo "$1" | rev | cut -d '.' -f2- | rev);
 	ffmpeg -i "$1" -filter:v "setpts=0.5*PTS" -an ${name}_timelapse.mp4;
@@ -63,7 +63,7 @@ function mkvlapse() {
 function ffinfo () {
 	if [ -z "$1" -o "$1" == "--help" ]; then
 			echo 'USAGE: ffinfo <file>';
-			exit 0;
+			return 0;
 	fi
 	video_stats=$(ffprobe -v quiet -select_streams v:0 -show_entries stream=codec_name,duration,height,bit_rate "$1");
 	bit_rate=$(echo "$video_stats" | grep bit_rate | grep -Eo '\d+');
@@ -81,7 +81,7 @@ function ffinfo () {
 ffsize () {
 	if [ -z "$1" -o "$1" == "--help" ]; then
 			echo 'USAGE: ffsize <file>';
-			exit 0;
+			return 0;
 	fi
 	ffprobe -v quiet -select_streams v:0 -show_entries stream=width,height "$1" | grep -v STREAM;
 }
@@ -90,7 +90,7 @@ ffsize () {
 function mkv2mp4() {
     if [ -z "$1" -o "$1" == "--help" ]; then
         echo 'USAGE: mkv2mp4 <mkv> [mp4]';
-        exit 0;
+        return 0;
     fi
     mkvname=$1;
     if [ -z "$2" ]; then
@@ -105,7 +105,7 @@ function mkv2mp4() {
 function mkv2wmv() {
     if [ -z "$1" -o "$1" == "--help" ]; then
         echo 'USAGE: mkv2wmv <mkv> [wmv]';
-        exit 0;
+        return 0;
     fi
     mkvname=$1;
     if [ -z "$2" ]; then
@@ -120,7 +120,7 @@ function mkv2wmv() {
 function avi2mp4() {
     if [ -z "$1" -o "$1" == "--help" ]; then
         echo 'USAGE: avi2mp4 <avi> [mp4]';
-        exit 0;
+        return 0;
     fi
     aviname=$1;
     if [ -z "$2" ]; then
@@ -135,7 +135,7 @@ function avi2mp4() {
 function mkscreens () {
  if [ -z "$1" -o "$1" == "--help" ]; then
    echo 'Usage: mkscreens <file> [step]'
-   exit 0;
+   return 0;
  fi
  mkdir screens 2>/dev/null;
  if [ -n "$2" ]; then
@@ -149,7 +149,7 @@ function mkscreens () {
 function mkpreviewgif () {
   if [ -z "$1" -o "$1" == "--help" ]; then
     echo 'Usage: mkpreviewgif <file> [--start|--stop|--step|--length|--fps|--scale]'
-    exit 0;
+    return 0;
   fi
 	start=60;
 	stop=$(ffprobe -v quiet -show_format "$1" | grep duration | grep -Eo "\d+\.\d+" | cut -d '.' -f1);
@@ -180,7 +180,7 @@ function mkpreviewgif () {
         ;;
         *)
         echo "Unknown option $i";
-        exit 1;
+        return 1;
       esac
     done
   fi
