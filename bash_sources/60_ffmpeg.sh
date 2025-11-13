@@ -9,7 +9,6 @@ if [ -z $(which ffmpeg 2> /dev/null) ]; then
 	return 1;
 fi
 
-alias ffjson='ffprobe -v quiet -print_format json -show_format -show_streams';
 alias ffplay='ffplay -loglevel quiet -autoexit';
 
 # Reverse a video clip
