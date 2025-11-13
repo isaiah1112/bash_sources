@@ -59,76 +59,13 @@ function mkvlapse() {
 	ffmpeg -i "$1" -filter:v "setpts=0.5*PTS" -an ${name}_timelapse.mp4;
 }
 
-# function for printing specific details about a video in a specific show_format
-function ffinfo () {
-	if [ -z "$1" -o "$1" == "--help" ]; then
-			echo 'USAGE: ffinfo <file>';
-			return 0;
-	fi
-	video_stats=$(ffprobe -v quiet -select_streams v:0 -show_entries stream=codec_name,duration,height,bit_rate "$1");
-	bit_rate=$(echo "$video_stats" | grep bit_rate | grep -Eo '\d+');
-	echo Filename: "$1";
-	echo Format: $(echo "$video_stats" | grep codec_name | cut -d '=' -f2);
-	echo Resolution: $(echo "$video_stats" | grep height | cut -d '=' -f2)p;
-	if [ -n "$bit_rate" ]; then
-		echo Bitrate: $(($bit_rate / 1000))kb/s;
-	fi
-	echo Duration: $(echo "$video_stats" | grep duration | cut -d '=' -f2 | cut -d '.' -f1)s;
-	echo Filesize: $(ls -h "$1" | awk '{print $5}');
-}
-
-# Function to exit resolution of video
+# Function to return resolution of video
 ffsize () {
 	if [ -z "$1" -o "$1" == "--help" ]; then
 			echo 'USAGE: ffsize <file>';
 			return 0;
 	fi
 	ffprobe -v quiet -select_streams v:0 -show_entries stream=width,height "$1" | grep -v STREAM;
-}
-
-# function for converting mkv to mp4 (container only)
-function mkv2mp4() {
-    if [ -z "$1" -o "$1" == "--help" ]; then
-        echo 'USAGE: mkv2mp4 <mkv> [mp4]';
-        return 0;
-    fi
-    mkvname=$1;
-    if [ -z "$2" ]; then
-        mp4name=$(echo "$mkvname" | sed 's/\.mkv/\.mp4/g');
-    else
-        mp4name=$2
-    fi
-    ffmpeg -i "$mkvname" -c:v copy -c:a copy "$mp4name";
-}
-
-# function for converting mkv to wmv (container only)
-function mkv2wmv() {
-    if [ -z "$1" -o "$1" == "--help" ]; then
-        echo 'USAGE: mkv2wmv <mkv> [wmv]';
-        return 0;
-    fi
-    mkvname=$1;
-    if [ -z "$2" ]; then
-        wmvname=$(echo "$mkvname" | sed 's/\.mkv/\.wmv/g');
-    else
-        wmvname=$2
-    fi
-    ffmpeg -i "$mkvname" -c:v copy -c:a copy "$wmvname";
-}
-
-# function for converting avi to mp4 (container only)
-function avi2mp4() {
-    if [ -z "$1" -o "$1" == "--help" ]; then
-        echo 'USAGE: avi2mp4 <avi> [mp4]';
-        return 0;
-    fi
-    aviname=$1;
-    if [ -z "$2" ]; then
-        mp4name=$(echo "$aviname" | sed 's/\.avi/\.mp4/g');
-    else
-        mp4name=$2
-    fi
-    ffmpeg -i "$aviname" -c:v copy -c:a copy "$mp4name";
 }
 
 # function for building screencaptures every X seconds with timestamps
