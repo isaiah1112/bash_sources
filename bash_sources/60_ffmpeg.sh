@@ -58,15 +58,6 @@ function mkvlapse() {
 	ffmpeg -i "$1" -filter:v "setpts=0.5*PTS" -an ${name}_timelapse.mp4;
 }
 
-# Function to return resolution of video
-ffsize () {
-	if [ -z "$1" -o "$1" == "--help" ]; then
-			echo 'USAGE: ffsize <file>';
-			return 0;
-	fi
-	ffprobe -v quiet -select_streams v:0 -show_entries stream=width,height "$1" | grep -v STREAM;
-}
-
 # function for building screencaptures every X seconds with timestamps
 function mkscreens () {
  if [ -z "$1" -o "$1" == "--help" ]; then
