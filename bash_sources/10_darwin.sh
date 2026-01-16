@@ -43,15 +43,15 @@ alias plist2bin='plutil -convert binary1';
 alias ssh='ssh -A';
 
 # Add ssh key to ssh-agent (if it exists)
-if [ -f ~/.ssh/id_rsa ]; then
-    ssh-add -K ~/.ssh/id_rsa 2>/dev/null;
-elif [ -f ~/.ssh/id_ed25519 ]; then
-	ssh-add -K ~/.ssh/id_ed25519 2>/dev/null;
+if [ -f ~/.ssh/id_ed25519 ]; then
+    ssh-add --apple-use-keychain ~/.ssh/id_ed25519 2>/dev/null
+elif [ -f ~/.ssh/id_rsa ]; then
+    ssh-add --apple-use-keychain ~/.ssh/id_rsa 2>/dev/null
 fi
 
 # If pdsh is installed, force it to use ssh
-if [ -n "$(which pdsh 2>/dev/null)" ]; then
-    export PDSH_RCMD_TYPE=ssh;
+if command -v pdsh &>/dev/null; then
+    export PDSH_RCMD_TYPE=ssh
 fi
 
 # Complete ssh and scp
