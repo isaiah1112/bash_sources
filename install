@@ -186,7 +186,7 @@ usage() {
 Usage: $(basename "$0") [OPTION] [TARGET]
 
 OPTIONS:
-    bashrc              Install bash_sources bashrc loader and all sources
+    bashrc              Install bash_sources bashrc loader and 00_default
     vimrc               Install vimrc configuration
     sshcfg              Install ssh config
     <source_file>       Install individual bash source (e.g., 10_darwin.sh)

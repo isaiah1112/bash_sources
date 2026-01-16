@@ -12,7 +12,7 @@ To get started, run:
 This will:
 - Install bash_profile and bashrc as symlinks to your home directory
 - Create `~/.bash_sources.d` directory
-- Automatically install all available bash source files
+- Automatically install `00_default.sh`  bash source file
 - Back up any existing files with a `.pre-bash_sources` suffix
 
 Then simply quit and re-launch your terminal.
@@ -23,46 +23,56 @@ For detailed installation options, run:
 
 # Sources
 
-All available sources are automatically installed when you run `./install bashrc`. To load a newly added source file later, simply run:
+The base `00_default.sh` source is installed automatically. To add additional sources, run:
 
-    profile reload
+    ./install <source_file>
 
-(Or restart your terminal)
+For example:
 
-## Loading Order
+    ./install 10_darwin.sh
+    ./install 60_docker.sh
 
-Source files are loaded in alphabetical order based on their numeric prefix:
+Then, simply run `profile reload` to load the new source (or restart your terminal).
 
-    00_default.sh -> first
+## Loading order
+
+Source files are loaded in alphabetical order. Files in `~/.bash_sources.d` are sourced in order:
+
+    00_default.sh (base, installed by default)
     10_darwin.sh
     10_linux.sh
+    40_macports.sh
+    60_docker.sh
+    60_ffmpeg.sh
     ...
-    90_fun.sh -> last
-
-Additional sources in `~/.bash_sources.d` are loaded in the same order.
+    90_fun.sh
 
 ## Adding Custom Sources
 
 You can add your own bash scripts to `~/.bash_sources.d`. Any file ending in `.sh` will be automatically sourced, loaded in alphabetical order.
 
-# Installing Other Configurations
+# VIMRC or SSH Config
 
-## VIMRC
+I've also included `vimrc` and `ssh` config files. To install them:
 
     ./install vimrc
-
-## SSH Config
-
     ./install sshcfg
 
 # Upgrading
 
-Simply run the install commands again. The installer will:
+Simply re-run the install commands. The installer will:
 - Validate all bash files for syntax errors
-- Back up existing files (if not already backed up)
+- Back up existing files (if not already backed up) with the `.pre-bash_sources` suffix
 - Update symlinks to the latest versions
 - Warn if backups already exist
 
 To force reinstall even if already installed:
 
     FORCE_INSTALL=1 ./install bashrc
+
+## Upgrading from pre-v2.X versions
+
+If upgrading from an older version:
+
+    unlink ~/.bash_profile
+    rm ~/.sources.d  # Optional. Move any custom sources to ~/.bash_sources.d first
