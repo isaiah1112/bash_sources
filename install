@@ -110,22 +110,14 @@ install_bashrc() {
     # Create bash_sources directory and install default sources
     mkdir -p "${HOME_DIR}/.bash_sources.d"
     
-    # Install all bash source files from bash_sources directory
-    for src_file in "${SCRIPT_DIR}/bash_sources"/*.sh; do
-        src_name=$(basename "$src_file")
-        
-        # Skip main loaders
-        if [[ "$src_name" == "bash_profile.sh" || "$src_name" == "bashrc.sh" ]]; then
-            continue
-        fi
-        
-        validate_bash_file "$src_file" || {
-            log_warn "Skipping invalid file: $src_name"
-            continue
-        }
-        
-        install_symlink "$src_file" "${HOME_DIR}/.bash_sources.d/${src_name}" "$src_name"
-    done
+    # Install base profile
+    src_file="${SCRIPT_DIR}/bash_sources/00_default.sh"
+    src_name=$(basename "$src_file")
+    validate_bash_file "$src_file" || {
+        log_warn "Skipping invalid file: $src_name"
+        continue
+    }
+    install_symlink "$src_file" "${HOME_DIR}/.bash_sources.d/${src_name}" "$src_name"
     
     log_info "bash_sources bashrc installation complete. Please reload your terminal."
 }
