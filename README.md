@@ -5,49 +5,74 @@ Thank you for taking the time to check out bash_sources.  This is my attempt to 
 
 # Installation
 
-To get started, run the following:
+To get started, run:
 
-	./install.sh bashrc
+    ./install bashrc
+
+This will:
+- Install bash_profile and bashrc as symlinks to your home directory
+- Create `~/.bash_sources.d` directory
+- Automatically install `00_default.sh`  bash source file
+- Back up any existing files with a `.pre-bash_sources` suffix
 
 Then simply quit and re-launch your terminal.
 
+For detailed installation options, run:
+
+    ./install -h
+
 # Sources
 
-To add a new source, simply run the following:
+The base `00_default.sh` source is installed automatically. To add additional sources, run:
 
-	./install.sh <profile>
+    ./install <source_file>
 
-Then, simply type `profile reload` to load the new profile!
+For example:
+
+    ./install 10_darwin.sh
+    ./install 60_docker.sh
+
+Then, simply run `profile reload` to load the new source (or restart your terminal).
 
 ## Loading order
 
-To specify a loading order for source scripts simply prefix with integers. Below is an example of how to load profiles
-in a specific order:
+Source files are loaded in alphabetical order. Files in `~/.bash_sources.d` are sourced in order:
 
-	00_default.sh -> /Users/jdoe/git/bash_sources/sources/00_default.sh
-	10_darwin.sh -> /Users/jdoe/git/bash_sources/sources/10_darwin.sh
-	30_git.sh -> /Users/jdoe/git/bash_sources/sources/30_git.sh
-	40_fun.sh -> /Users/jdoe/git/bash_sources/sources/40_fun.sh
-	90_bash_completion.sh -> /opt/local/etc/profile.d/bash_completion.sh
-	90_virtualenvwrapper.sh -> /opt/local/bin/virtualenvwrapper.sh
-	99_local.sh
+    00_default.sh (base, installed by default)
+    10_darwin.sh
+    10_linux.sh
+    40_macports.sh
+    60_docker.sh
+    60_ffmpeg.sh
+    ...
+    90_fun.sh
 
-## Other Sources
+## Adding Custom Sources
 
-You can store other sources in your **~/.bash_sources.d** directory.  As long as they are bash scripts (ending with `.sh`)
-they will be loaded as a source by `.bashrc`!
-
+You can add your own bash scripts to `~/.bash_sources.d`. Any file ending in `.sh` will be automatically sourced, loaded in alphabetical order.
 
 # VIMRC or SSH Config
 
-I've also included my `vimrc` and `ssh` config files. To install them simply:
+I've also included `vimrc` and `ssh` config files. To install them:
 
-	./install.sh vimrc
-	./install.sh sshcfg
+    ./install vimrc
+    ./install sshcfg
 
-# Upgrading from a previous version
+# Upgrading
 
-When upgrading from a pre-v2.X version of bash_sources, perform the following:
+Simply re-run the install commands. The installer will:
+- Validate all bash files for syntax errors
+- Back up existing files (if not already backed up) with the `.pre-bash_sources` suffix
+- Update symlinks to the latest versions
+- Warn if backups already exist
 
-	unlink ~/.bash_profile;
-	rm ~/.sources.d; # Optional. If you have non-linked sources in here move them to the new ~/.bash_sources.d directory before deleting this one.
+To force reinstall even if already installed:
+
+    FORCE_INSTALL=1 ./install bashrc
+
+## Upgrading from pre-v2.X versions
+
+If upgrading from an older version:
+
+    unlink ~/.bash_profile
+    rm ~/.sources.d  # Optional. Move any custom sources to ~/.bash_sources.d first

@@ -8,7 +8,7 @@ if [ -z "$(which python 2>/dev/null)" ]; then
     return 1;
 fi
 
-# Python Poetry
+# Poetry or UV
 export PATH="/Users/jesse/.local/bin:$PATH";
 # Env
 export PYTHON_VERSION=$(python --version 2>&1 | awk '{print $NF}');
