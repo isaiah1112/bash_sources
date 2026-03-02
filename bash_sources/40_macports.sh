@@ -15,7 +15,7 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH";
 
 # Add aliases for MacPorts
 alias portupdate="sudo port selfupdate && sudo port upgrade outdated";
-alias portclean="sudo port clean -f --all installed && sudo port -f uninstall inactive && sudo port uninstall leaves";
+alias portclean="sudo port clean -f --all installed;sudo port -f uninstall inactive;sudo port uninstall leaves";
 
 # Setup VirtualENVWrapper
 if [ -f /opt/local/bin/virtualenvwrapper.sh ]; then
