@@ -2,26 +2,32 @@
 ### License: GNU GPLv3 (https://choosealicense.com/licenses/gpl-3.0/)
 ### The idea behind the defaults profile is to load things that work on any UNIX OS
 
+# Safety: Exit on undefined variables
+set -u
+
 # Environment Variables
 # Set the Locale
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-# Set the Prompt
-export PS1="\H:\u:\W$ "
+
+# Set the Prompt (use \[ \] for non-printing chars)
+PS1='\h:\u:\W$ '
+
 # Set History Options
-export HISTCONTROL=ignoreboth:ignorespace:erasedupes
+export HISTCONTROL=ignoreboth:ignorespace:erasedups
 export HISTSIZE=10000
 export HISTFILESIZE=10000
 shopt -s histappend
 shopt -s histverify
+
 # Set Editor Options
-export LESS="iX"
+export LESS='-iX'
 export OS=$(uname)
 export EDITOR="${EDITOR:-$(command -v vim || command -v vi)}"
 export HOSTS="/etc/hosts"
 
 # Basic Aliases
-alias cp='cp -r';
+alias cp='cp -R';
 alias cls='clear';
 alias df='df -h';
 alias du='du -shx';
@@ -31,8 +37,7 @@ alias hostgrp="grep -i $HOSTS";
 alias la='ls -lAh';
 alias ll='ls -lh';
 alias lns='ln -sfn';
-alias portgrp='sudo netstat -lp | grep -i';
-alias rm='rm -r';
+alias portgrp='sudo ss -lp | grep -i';
 alias ssu='sudo su -';
 alias stail='sudo tail';
 alias svi='sudo $EDITOR';
@@ -40,14 +45,15 @@ alias vi='$EDITOR';
 alias wcl='wc -l';
 
 # Functions
-function b64encode() { echo -n "$1" | base64; }
-function b64decode() { echo "$(echo -n "$1" | base64 --decode)"; }
+# Base64 encode/decode
+b64encode() { echo -n "$1" | base64; }
+b64decode() { echo -n "$1" | base64 --decode; }
+
 # Backup a file with datestamp
-function bu() { cp -p "$1" "$1_$(date +%Y%m%d-%H%M)_$(whoami)"; }
-# Use help if no man page
-function man() { /usr/bin/man $@ || (help $@ 2> /dev/null && help $@ | less) }
+bu() { cp -p "$1" "$1_$(date +%Y%m%d-%H%M)_$(whoami)"; }
+
 # Compression functions
-function mkgz() {
+mkgz() {
     if [ -z "$1" ]; then
         echo "Usage: mkgz <file>"
         return 1
@@ -61,19 +67,23 @@ function mkgz() {
         gzip -c9 "$1" > "$1.gz"
     fi
 }
-function untar() { tar -xf "$@"; }
-function mktar() {
+
+untar() { tar -xf "$@"; }
+
+mktar() {
     if [ -z "$1" ] || [ ! -e "$1" ]; then
         echo "Usage: mktar <file_or_directory>"
         return 1
     fi
     tar -cf "$1.tar" "$1"
 }
-function mktgz() {
+
+mktgz() {
     if [ -z "$1" ] || [ ! -e "$1" ]; then
         echo "Usage: mktgz <file_or_directory>"
         return 1
     fi
     tar -czf "$1.tgz" "$1"
 }
-function mktZ() { tar -cZf "$@"; }
+
+mktZ() { tar -cZf "$@"; }
