@@ -26,6 +26,7 @@ fi
 alias fstab='sudo $EDITOR /etc/fstab'
 alias flushdns='sudo systemd-resolve --flush-caches'
 alias free='free -m'
+alias portgrp='sudo ss -lp | grep -i';
 
 # Network stats using modern 'ip' command
 bandwidth_stats() {

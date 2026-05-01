@@ -53,7 +53,6 @@ alias hostgrp="grep -i $HOSTS";
 alias la='ls -lAh';
 alias ll='ls -lh';
 alias lns='ln -sfn';
-alias portgrp='sudo ss -lp | grep -i';
 alias ssu='sudo su -';
 alias stail='sudo tail';
 alias svi='sudo $EDITOR';
