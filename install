@@ -165,7 +165,7 @@ install_source() {
     if [[ ! -f "$src_file" ]]; then
         log_error "Source file not found: $source_name"
         log_info "Available sources:"
-        ls -1 "${SCRIPT_DIR}/bash_sources"/*.sh 2>/dev/null | grep -v -E "(bash_profile|bashrc)" | xargs -n1 basename || true
+        printf '%s\n' "${SCRIPT_DIR}"/bash_sources/*.sh 2>/dev/null | xargs -n1 basename | grep -v -E "(bash_profile|bashrc)" || true
         return 1
     fi
     
