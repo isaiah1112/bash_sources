@@ -157,8 +157,8 @@ install_source() {
     local source_name="$1"
     local src_file="${SCRIPT_DIR}/bash_sources/${source_name}"
     
-    if [[ ! -f "${SCRIPT_DIR}/bash_sources/.bash_sources.d" ]]; then
-        log_error ".bash_sources.d not found. Please run 'install bashrc' first"
+    if [[ ! -f "${HOME_DIR}/.bash_sources.d" ]]; then
+        log_error "${HOME_DIR}/.bash_sources.d not found. Please run 'install bashrc' first"
         return 1
     fi
     
