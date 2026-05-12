@@ -3,7 +3,7 @@
 ### The idea behind the defaults profile is to load things that work on any UNIX OS
 
 # Safety: Exit on undefined variables
-set -u
+# set -u
 
 # Environment Variables
 # Set the Locale
