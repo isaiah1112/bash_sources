@@ -49,7 +49,6 @@ alias df='df -h';
 alias du='du -shx';
 alias e='exit';
 alias hg='history | grep -i';
-alias hostgrp="grep -i $HOSTS";
 alias la='ls -lAh';
 alias ll='ls -lh';
 alias lns='ln -sfn';
@@ -60,6 +59,9 @@ alias vi='$EDITOR';
 alias wcl='wc -l';
 
 # Functions
+# Grep the $HOSTS file
+hostgrp() { grep -i "$1" "$HOSTS"; }
+
 # Base64 encode/decode
 b64encode() { echo -n "$1" | base64; }
 b64decode() { echo -n "$1" | base64 --decode; }
