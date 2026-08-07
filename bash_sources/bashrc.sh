@@ -64,6 +64,7 @@ _profile_autocomplete() {
           COMPREPLY=()
           ;;
       esac
+      ;;
     *) # too many (or too few?) words to work with
       COMPREPLY=()
       ;;
