@@ -10,3 +10,10 @@ command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 command WQ :execute ':W' | :q
 command Wq :Wq
 command Q :q
+
+" Python syntax highlighting
+augroup python
+  autocmd!
+  autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4
+  autocmd FileType python syntax on
+augroup END
