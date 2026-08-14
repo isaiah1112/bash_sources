@@ -17,3 +17,10 @@ augroup python
   autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4
   autocmd FileType python syntax on
 augroup END
+
+" JSON syntax highlighting
+augroup json
+  autocmd!
+  autocmd BufRead,BufNewFile *.json setlocal filetype=json
+  autocmd FileType json syntax on
+augroup END
