@@ -4,7 +4,7 @@
 ### Just a bunch of "fun" things you can add to your bash profile
 
 # Play ascii starwars
-if [ -n "$(which telnet)"]; then
+if command -v telnet &>/dev/null; then
   alias starwars='telnet towel.blinkenlights.nl';
 fi
 

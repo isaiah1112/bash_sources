@@ -3,7 +3,7 @@
 ### License: GNU GPLv3 (https://choosealicense.com/licenses/gpl-3.0/)
 
 # Check if MacPorts is installed
-if [ ! -f /opt/local/bin/port ]; then
+if ! command -v port &>/dev/null; then
     echo "MacPorts not installed. Skipping source.";
     return 1;
 fi
