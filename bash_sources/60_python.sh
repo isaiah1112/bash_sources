@@ -31,14 +31,10 @@ mkvenv() {
 }
 
 activate() {
-    local venv="${1:-}"
-    if [[ -z "$venv" ]]; then
-        echo "Usage: activate <venv_name>"
-        return 1
-    fi
+    local venv="${1:-.venv}"
     if [[ -d "$venv" ]]; then
         source "$venv/bin/activate"
-    elif [[ -d ".venv" ]]; then
+    elif [[ -z "${1:-}" && -d ".venv" ]]; then
         source .venv/bin/activate
     else
         echo "No virtual environment found: $venv"
